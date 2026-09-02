@@ -1,8 +1,9 @@
 import { Outlet } from "react-router";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
-function App() {
-  
+
+export default function App() {
+  //en async funktion som fetchar 
 
   return (
     <> {
@@ -27,4 +28,3 @@ function App() {
   )
 }
 
-export default App
