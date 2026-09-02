@@ -3,7 +3,7 @@
     {
       "id": "1",
       "name": "CD",
-      "price": 2,
+      "price": 299,
       "stock": 6000
     },
     {
@@ -19,22 +19,22 @@
       "stock": 40
     },
     {
+      "id": "4",
       "name": "Vinyl",
-      "price": 800,
-      "stock": 40,
-      "id": "7qGAP4YTqhM"
+      "price": 359,
+      "stock": 40
     },
     {
+      "id": "5",
       "name": "DVD",
-      "price": 1,
-      "stock": 1,
-      "id": "ycuxvMzrbmM"
+      "price": 149,
+      "stock": 100
     },
     {
+      "id": "6",
       "name": "Grammofon",
-      "price": 2,
-      "stock": 2,
-      "id": "LfuDnx5OSKY"
+      "price": 1249,
+      "stock": 2
     }
   ]
 }
