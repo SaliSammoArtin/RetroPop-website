@@ -1,7 +1,7 @@
 // hämtar in hooks från React
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import ProductCard from "./ProductCard.jsx";
+import ProductCard from "../components/ProductCard.jsx";
 
 export default function Products() {
   // Skapar en state-variabel som håller listan med produkter.
@@ -26,15 +26,13 @@ export default function Products() {
 
   return (
     <>
-      <div className=" rounded-2xl bg-white/30 backdrop-blur-2xl border border-white/10 flex-wrap justify-evenly align-middle max-w-2xl m-auto">
-        <p> These are our products </p>
-        {products.map((product) => {
-          return (
-            <Link key={product.id} to={`/products/${product.id}`}>
-              <ProductCard name={product.name} price={product.price} />
-            </Link>
-          );
-        })}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-3xl m-auto p-6">
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+          />
+        ))}
       </div>
     </>
   );
