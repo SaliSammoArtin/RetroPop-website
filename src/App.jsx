@@ -1,29 +1,21 @@
 import { Outlet } from "react-router";
-import NavBar from "./Components/NavBar";
-import Footer from "./Components/Footer";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 
 export default function App() {
-
   return (
-    <> {
-
-    }
-      <div id="page-content">
+    <div className="min-h-screen flex flex-col">
+      {" "}
+      {}
+      <div id="page-content" className="flex-1">
         <header>
-        <NavBar />
+          <NavBar />
         </header>
-        {
-
-        }
-        <Outlet/>
-        
-      </div> 
-      
-      {
-
-      }
-      <Footer/>
-    </>
-  )
+        {}
+        <Outlet />
+      </div>
+      {}
+      <Footer />
+    </div>
+  );
 }
-
