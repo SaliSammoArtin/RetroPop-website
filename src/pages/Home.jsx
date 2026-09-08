@@ -1,10 +1,10 @@
-import ProductCards from "../components/ProductCard";
+import Products from "../pages/Products";
+
 export default function Home() {
   return (
     <>
       <main>
-        {" "}
-        <ProductCards></ProductCards>
+        <Products />
       </main>
     </>
   );
