@@ -26,7 +26,7 @@ export default function Products() {
 
   return (
     <>
-      <div className=" w-64 bg-slate-200 m-auto">
+      <div className=" rounded-2xl bg-white/30 backdrop-blur-2xl border border-white/10 flex-wrap justify-evenly align-middle max-w-2xl m-auto">
         <p> These are our products </p>
         {products.map((product) => {
           return (
