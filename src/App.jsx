@@ -8,7 +8,7 @@ export default function App() {
       {" "}
       {}
       <div id="page-content" className="flex-1">
-        <header>
+        <header className="sticky top-0 z-10">
           <NavBar />
         </header>
         {}
