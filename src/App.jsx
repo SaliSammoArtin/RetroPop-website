@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import CartView from "./components/CartView";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         {}
         <Outlet />
       </div>
+      <CartView />
       {}
       <Footer />
     </div>

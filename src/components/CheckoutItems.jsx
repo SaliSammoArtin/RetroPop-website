@@ -11,7 +11,6 @@ export default function CartItems({ items }) {
       <p>Subtotal: {(items.price * items.quantity).toFixed(2)} kr</p>
       <button onClick={() => addToCart(items)}>+</button>
       <button onClick={() => removeFromCart(items.id)}>-</button>
-      <p></p>
     </div>
   );
 }
