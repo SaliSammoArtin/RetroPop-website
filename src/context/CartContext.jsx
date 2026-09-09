@@ -9,7 +9,7 @@ export const CartProvider = ({ children }) => {
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
 
-  const addToCard = (product) => {
+  const addToCart = (product) => {
     setCartItems(PrevItems => {
       const existingItem = PrevItems.find(item => item.id === product.id);
 
@@ -20,11 +20,23 @@ export const CartProvider = ({ children }) => {
             : item
         );
       }
+      return [...PrevItems, { ...product, quantity: 1 }];
     }
     )
   }
+
+  const removeFromCart = (productId) => {
+  setCartItems((prevItems) =>
+    prevItems.map(item => item.id === productId
+      ? { ...item, quantity: item.quantity - 1 }
+      : item
+    )
+    .filter(item => item.quantity > 0)
+  );
+}
+
   return (
-    <CartContext.Provider value={{ cartItems, setCartItems, isCartOpen, openCart, closeCart }}>
+    <CartContext.Provider value={{ cartItems, setCartItems, isCartOpen, openCart, closeCart, addToCart, removeFromCart }}>
       {children}
     </CartContext.Provider>
   );
