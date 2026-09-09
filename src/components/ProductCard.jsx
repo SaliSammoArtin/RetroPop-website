@@ -1,18 +1,8 @@
-import { Link } from "react-router";
-import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
-
-
+import { useCart } from "../context/CartContext";
 
 export default function ProductCard({ product }) {
 
-  const { cart, setCart } = useContext(CartContext);
-  const addToCart = () => {
-    setCart([
-      ...cart,
-      { ...product, quantity: 1 }
-    ]);
-  }; 
+  const { addToCart } = useCart();
   
   return (
       <div className="rounded-2xl bg-white/30 backdrop-blur-2xl border border-white/10 shadow-lg p-6 flex flex-col gap-2 min-h-96 transition hover:scale-105 hover:bg-white/40">
@@ -31,7 +21,7 @@ export default function ProductCard({ product }) {
         </p>
 
         <button
-          onClick={addToCart}
+        onClick={() => addToCart(product)}
           className="mt-auto rounded-xl bg-black text-white py-2 hover:bg-zinc-800"
         >
           Add to cart
