@@ -4,37 +4,61 @@
       "id": "1",
       "name": "CD",
       "price": 299,
-      "stock": 6000
+      "stock": 6000,
+      "width": 15,
+      "height": 15,
+      "length": 1,
+      "weight": 0.1
     },
     {
       "id": "2",
       "name": "VHS",
       "price": 249,
-      "stock": 70
+      "stock": 70,
+      "width": 3,
+      "height": 15,
+      "length": 25,
+      "weight": 0.3
     },
     {
       "id": "3",
       "name": "Kassettband",
       "price": 499,
-      "stock": 40
+      "stock": 40,
+      "width": 3,
+      "height": 15,
+      "length": 1,
+      "weight": 0.1
     },
     {
       "id": "4",
       "name": "Vinyl",
       "price": 359,
-      "stock": 40
+      "stock": 40,
+      "width": 12,
+      "height": 12,
+      "length": 1,
+      "weight": 0.2
     },
     {
       "id": "5",
       "name": "DVD",
       "price": 149,
-      "stock": 100
+      "stock": 100,
+      "width": 15,
+      "height": 15,
+      "length": 1,
+      "weight": 0.1
     },
     {
       "id": "6",
       "name": "Grammofon",
       "price": 1249,
-      "stock": 2
+      "stock": 2,
+      "width": 30,
+      "height": 30,
+      "length": 1,
+      "weight": 1.0
     }
   ]
 }
