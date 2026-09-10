@@ -1,21 +1,19 @@
-import { useContext } from 'react';
-import { CartContext } from '../context/CartContext';
-import CartItems from "../components/CartItems";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+import CartItems from "../components/CheckoutItems";
 
-
-function Cart() {
-  const { cartItems } = useContext(CartContext);
+export default function Cart() {
+  const { cartItems, totalPrice } = useContext(CartContext);
 
   return (
     <div>
       <h1>Cart</h1>
 
-      {cartItems.map(item => (
+      {cartItems.map((item) => (
         <CartItems key={item.id} items={item} />
-
       ))}
-    </div>
-  )
-}
 
-export default Cart;
+      <h2>Total: {totalPrice.toFixed(2)}kr</h2>
+    </div>
+  );
+}
