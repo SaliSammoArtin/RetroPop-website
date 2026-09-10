@@ -60,5 +60,29 @@
       "length": 1,
       "weight": 1.0
     }
-  ]
+  ],
+  "carriers": [
+    {
+      "id": 1,
+      "name": "PostNord",
+      "pricingModel": "weight",
+      "basePrice": 49,
+      "pricePerKg": 12
+    },
+    {
+      "id": 2,
+      "name": "DHL",
+      "pricingModel": "weight",
+      "basePrice": 59,
+      "pricePerKg": 10
+    },
+    {
+      "id": 3,
+      "name": "UPS",
+      "pricingModel": "weight",
+      "basePrice": 39,
+      "pricePerKg": 15
+    }
+  ],
+  "orders": []
 }
