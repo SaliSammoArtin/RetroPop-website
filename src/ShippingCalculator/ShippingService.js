@@ -19,6 +19,12 @@ export default class ShippingService {
   }
 
   async getCarriers() {
+
+    if (!response.ok) {
+      throw new Error("Kunde inte hämta transportörer");
+    }
+
+
     const response = await fetch("/api/carriers");
     const data = await response.json();
 
@@ -40,6 +46,14 @@ export default class ShippingService {
 
   }
   async run(values, context) {
+
+    if (!values.destination) {
+      throw new Error("Välj en destination");
+    }
+    if (!context.cart || context.cart.length === 0) {
+      throw new Error("Kundvagnen är tom");
+    }
+
     const parcel = new Parcel(context.cart);
 
     return await this.getQuotes(parcel, values.destination);
