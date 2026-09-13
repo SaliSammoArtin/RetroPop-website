@@ -37,6 +37,5 @@
       "stock": 2
     }
   ],
-  "stockMovements": [],
-  "$schema": "./node_modules/json-server/schema.json"
+  "stockMovements": []
 }
