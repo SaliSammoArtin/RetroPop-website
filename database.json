@@ -36,5 +36,7 @@
       "price": 1249,
       "stock": 2
     }
-  ]
+  ],
+  "stockMovements": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }
