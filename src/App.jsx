@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import CartView from "./components/CartView";
 
 export default function App() {
   return (
@@ -8,12 +9,13 @@ export default function App() {
       {" "}
       {}
       <div id="page-content" className="flex-1">
-        <header>
+        <header className="sticky top-0 z-10">
           <NavBar />
         </header>
         {}
         <Outlet />
       </div>
+      <CartView />
       {}
       <Footer />
     </div>
