@@ -39,7 +39,7 @@ export default class Money {
     return new Money(this.#amount * rate, targetCurrency);
   }
 
-  priceWithTax() {
+  format() {
     return `${this.#amount.toFixed(2)} ${this.#currency}`;
   }
 }

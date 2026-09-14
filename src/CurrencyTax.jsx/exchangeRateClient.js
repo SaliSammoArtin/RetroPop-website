@@ -1,7 +1,11 @@
 export class UnknownCurrencyError extends Error {
   constructor(currency) {
     super(
-      `Currency ${currency} is not supported. Supported currencies are: ${Array.from(SUPPORTED_CURRENCIES).join(", ")} `,
+      `Currency ${currency} is not supported. Supported currencies are: ${Array.from(
+        SUPPORTED_CURRENCIES,
+      )
+        .map((curr) => `"${curr}"`)
+        .join(", ")} `,
     );
     this.name = "UnknownCurrencyError";
   }
@@ -24,11 +28,11 @@ export default class ExchangeRateClient {
     const fromUpper = String(from || "").toUpperCase();
     const toUpper = String(to || "").toUpperCase();
 
-    if (!SUPPORTED_CURRECNIES.has(fromUpper)) {
+    if (!SUPPORTED_CURRENCIES.has(fromUpper)) {
       throw new UnknownCurrencyError(fromUpper);
     }
 
-    if (!SUPPORTED_CURRECNIES.has(toUpper)) {
+    if (!SUPPORTED_CURRENCIES.has(toUpper)) {
       throw new UnknownCurrencyError(toUpper);
     }
 
