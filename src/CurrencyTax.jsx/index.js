@@ -1,5 +1,6 @@
-import ExchangeRateClient from "./exhangeRate.js";
+import ExchangeRateClient from "./exchangeRateClient.js";
 import TaxTable from "./taxTable.js";
+import Money from "./money.js";
 
 export default class TaxAndCurrencyCalc {
   #taxTable = new TaxTable();
