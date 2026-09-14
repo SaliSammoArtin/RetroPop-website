@@ -15,7 +15,7 @@ export default class TaxTable {
   getRate(category) {
     const rate = this.#rates[category];
     if (rate === undefined) {
-      throw new Error(`Unknown tax category: ${category}`);
+      throw new UnkwownCategoryError(category);
     }
     return rate;
   }
