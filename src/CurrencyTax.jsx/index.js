@@ -9,20 +9,32 @@ export default class TaxAndCurrencyCalc {
   async calculatePrice(amount, category, targetCurrency = "SEK") {
     const baseMoney = new Money(Number(amount), "SEK");
 
-    const taxRate = this.#taxTable.getRate(category);
+    const moneyWithTax = this.#taxTable.applyTax(baseMoney, category);
 
-    const moneyWithTax = baseMoney.addTax(taxRate);
-
-    const rate = await this.#rateClient.getRate("SEK", targetCurrency);
-
-    const convertedAmount = moneyWithTax.amount * rate;
-    const finalMoney = new Money(convertedAmount, targetCurrency);
+    const finalMoney = await this.convertCurrency(moneyWithTax, targetCurrency);
 
     return {
       originalPrice: baseMoney.priceWithTax(),
-      taxRate: taxRate,
+      taxRate: this.#taxTable.getRate(category),
       finalPrice: finalMoney.priceWithTax(),
       finalMoney: finalMoney,
     };
+  }
+
+  getTaxRate(category) {
+    return this.#taxTable.getRate(category);
+  }
+
+  applyTax(money, category) {
+    return this.#taxTable.applyTax(money, category);
+  }
+
+  async convertCurrency(money, targetCurrency) {
+    const rate = await this.#rateClient.getRate(money.currency, targetCurrency);
+    return money.convert(rate, targetCurrency);
+  }
+
+  addPrices(firstMoney, secondMoney) {
+    return firstMoney.add(secondMoney);
   }
 }
