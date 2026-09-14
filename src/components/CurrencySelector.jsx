@@ -31,13 +31,13 @@ export default function CurrencySelector() {
         <option value="SEK" className="bg-slate-950/40 text-white ">
           SEK
         </option>
-        <option value="USD" className="bg-slate-950/40 text-white">
+        <option value="EUR" className="bg-slate-950/40 text-white">
           EUR
         </option>
-        <option value="EUR" className="bg-slate-950/40 text-white">
+        <option value="NOK" className="bg-slate-950/40 text-white">
           NOK
         </option>
-        <option value="EUR" className="bg-slate-950/40 text-white">
+        <option value="DKK" className="bg-slate-950/40 text-white">
           DKK
         </option>
       </select>
