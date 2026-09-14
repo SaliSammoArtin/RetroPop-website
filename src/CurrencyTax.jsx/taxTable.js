@@ -1,7 +1,7 @@
 export class UnkwownCategoryError extends Error {
   constructor(category) {
     super(`Unknown category: ${category}.`);
-    this.name = "UnkwownCategoryError";
+    this.name = "UnknownCategoryError";
   }
 }
 
