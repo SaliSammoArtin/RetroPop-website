@@ -2,22 +2,25 @@ import { Outlet } from "react-router";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import CartView from "./components/CartView";
+import { CurrencyProvider } from "./context/CurrencyContext";
 
 export default function App() {
   return (
-    <div className="min-h-screen flex flex-col">
-      {" "}
-      {}
-      <div id="page-content" className="flex-1">
-        <header className="sticky top-0 z-10">
-          <NavBar />
-        </header>
+    <CurrencyProvider>
+      <div className="min-h-screen flex flex-col">
+        {" "}
         {}
-        <Outlet />
+        <div id="page-content" className="flex-1">
+          <header className="sticky top-0 z-10">
+            <NavBar />
+          </header>
+          {}
+          <Outlet />
+        </div>
+        <CartView />
+        {}
+        <Footer />
       </div>
-      <CartView />
-      {}
-      <Footer />
-    </div>
+    </CurrencyProvider>
   );
 }
