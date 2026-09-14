@@ -1,7 +1,7 @@
 export class UnknownCurrencyError extends Error {
   constructor(currency) {
     super(
-      `Currency ${currency} is not supported. Supported currencies are: ${Array.from(SUPPORTED_CURRECNIES).join(", ")} `,
+      `Currency ${currency} is not supported. Supported currencies are: ${Array.from(SUPPORTED_CURRENCIES).join(", ")} `,
     );
     this.name = "UnknownCurrencyError";
   }
@@ -15,7 +15,7 @@ export class ExchangeRateFetchError extends Error {
 }
 
 const CACHE_TTL_MS = 60 * 60 * 1000;
-const SUPPORTED_CURRECNIES = new Set(["SEK", "NOK", "EUR", "DKK"]);
+const SUPPORTED_CURRENCIES = new Set(["SEK", "NOK", "EUR", "DKK"]);
 export default class ExchangeRateClient {
   #cache = new Map();
   #pendingRequest = new Map();
