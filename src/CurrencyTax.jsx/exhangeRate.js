@@ -1,6 +1,6 @@
 const CACHE_TTL_MS = 60 * 60 * 1000;
 const CURRECNIES = new Set(["SEK", "NOK", "EUR", "DKK"]);
-export default class ExhangeRate {
+export default class ExchangeRateClient {
   #cache = new Map();
   #pendingRequest = new Map();
 

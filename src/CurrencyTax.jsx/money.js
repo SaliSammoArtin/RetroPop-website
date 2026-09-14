@@ -17,7 +17,7 @@ export default class Money {
     return new Money(this.#amount * (1 + rate), this.#currency);
   }
 
-  sum() {
+  priceWithTax() {
     return `${this.#amount.toFixed(2)} ${this.#currency}`;
   }
 }
