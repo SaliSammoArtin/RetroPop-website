@@ -9,12 +9,12 @@ export default function ProductCard({ product }) {
   const { finalPrice, loading } = useCalculatedPrice(product, currency);
 
   return (
-    <div className=" bg-slate-400/40  backdrop-blur-2xl border border-white/10 shadow-lg p-6 flex flex-col gap-2 min-h-96 transition hover:scale-105 hover:bg-white/40">
-      <div className="flex-1 rounded-xl bg-white/20 mb-2 " />
+    <div className=" bg-retro-green-text text-retro-cream-bg border-2 shadow-lg p-6 flex flex-col gap-2 min-h-96 transition hover:scale-105 hover:bg-retro-green-text/80 border-retro-cream-bg">
+      <div className="flex-1 rounded-xl bg-retro-yellow-highlight mb-2 " />
 
       <h3 className="text-xl font-semibold italic">{product.name}</h3>
 
-      <p className="text-lg font-bold">
+      <p className="text-lg font-bold text-retro-orange-bg">
         {loading ? "..." : `${finalPrice.toFixed(2)} ${currency}`}
       </p>
 
@@ -22,12 +22,12 @@ export default function ProductCard({ product }) {
 
       <button
         onClick={() => addToCart(product)}
-        className="mt-auto rounded-xl bg-black text-white py-2 hover:bg-zinc-800">
+        className="mt-auto rounded-xl bg-retro-orange-bg text-retro-dark-text font-semibold py-2 hover:bg-retro-yellow-highlight">
         Add to cart
       </button>
       <Link
         to={`/products/${product.id}`}
-        className="mt-auto rounded-xl bg-black text-white py-2 hover:bg-zinc-800 justify-center flex">
+        className="mt-auto rounded-xl border border-retro-cream-bg/40 text-retro-cream-bg py-2 hover:border-retro-yellow-highlight hover:text-retro-yellow-highlight justify-center flex">
         View details!
       </Link>
     </div>

@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+@theme {
+  --color-retro-orange-bg: #e8622c;
+  --color-retro-green-text: #2e4a45;
+  --color-retro-cream-bg: #f4e9d8;
+  --color-retro-yellow-highlight: #f4c542;
+  --color-retro-dark-text: #3b3b3b;
+}

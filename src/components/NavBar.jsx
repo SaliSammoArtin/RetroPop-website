@@ -6,23 +6,28 @@ export default function NavBar() {
   const { openCart } = useCart();
   return (
     <nav>
-      <div className=" mb-6 flex w-full bg-white/30 backdrop-blur-2xl border border-white/10">
+      <div className=" mb-6 flex w-full bg-retro-green-text border-b border-retro-yellow-highlight text-retro-cream-bg">
         <div className=" m-3 ml-4 p-3 text-xl">
-          <Link to="/" className="p-3 hover:text-white/30">
+          <Link to="/" className="p-3 hover:text-retro-yellow-highlight">
             Homepage
           </Link>
-          <Link to="/products" className="p-3 hover:text-white/30">
+          <Link
+            to="/products"
+            className="p-3 hover:text-retro-yellow-highlight">
             Products
           </Link>
-          <Link to="/products" className="p-3 hover:text-white/30">
+          <Link
+            to="/products"
+            className="p-3 hover:text-retro-yellow-highlight">
             Categories
           </Link>{" "}
         </div>
-        <div className="flex items-center gap-4 ml-auto text-xl mr-8">
+        <div className="flex items-center gap-8 ml-auto text-xl mr-8">
           <CurrencySelector />
           <button
             onClick={openCart}
-            className=" hover:text-white/30 hover:scale-110 hover:rotate-45 p-4">
+            aria-label="Open cart"
+            className=" transition-transform hover:text-retro-yellow-highlight hover:scale-110 p-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
