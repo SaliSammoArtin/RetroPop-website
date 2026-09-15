@@ -36,6 +36,12 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  const deleteFromCart = (productId) => {
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item.id !== productId),
+    );
+  };
+
   const totalPrice = cartItems.reduce((accumulator, item) => {
     return accumulator + item.price * item.quantity;
   }, 0);
@@ -50,6 +56,7 @@ export const CartProvider = ({ children }) => {
         closeCart,
         addToCart,
         removeFromCart,
+        deleteFromCart,
         totalPrice,
       }}>
       {children}

@@ -12,7 +12,7 @@ export default function ShoppingCart() {
         <h2 className="text-xl font-semibold tracking-wide">Your cart!</h2>
         <button
           onClick={closeCart}
-          className="  hover:animate-spin hover:scale-125 hover:text-red-500 hover:cursor-pointer transition-colors p-1">
+          className=" text-white text-2xl hover:animate-spin hover:scale-125 hover:text-red-500 hover:cursor-pointer transition-colors p-1">
           {" "}
           <svg
             xmlns="http://www.w3.org/2000/svg"

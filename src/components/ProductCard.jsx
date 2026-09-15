@@ -5,7 +5,7 @@ export default function ProductCard({ product }) {
   const { addToCart } = useCart();
 
   return (
-    <div className=" bg-white/30 backdrop-blur-2xl border border-white/10 shadow-lg p-6 flex flex-col gap-2 min-h-96 transition hover:scale-105 hover:bg-white/40">
+    <div className=" bg-slate-400/40  backdrop-blur-2xl border border-white/10 shadow-lg p-6 flex flex-col gap-2 min-h-96 transition hover:scale-105 hover:bg-white/40">
       <div className="flex-1 rounded-xl bg-white/20 mb-2 " />
 
       <h3 className="text-xl font-semibold italic">{product.name}</h3>
