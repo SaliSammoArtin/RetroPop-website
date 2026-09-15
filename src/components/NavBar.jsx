@@ -18,7 +18,7 @@ export default function NavBar() {
             Categories
           </Link>{" "}
         </div>
-        <div className="flex items-center gap-4 ml-auto text-xl">
+        <div className="flex items-center gap-4 ml-auto text-xl mr-8">
           <CurrencySelector />
           <button
             onClick={openCart}
