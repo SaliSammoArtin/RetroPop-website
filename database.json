@@ -48,6 +48,13 @@
       "price": 199,
       "stock": 25,
       "taxCategory": "BOCKER"
+    },
+    {
+      "id": "8",
+      "name": "Jolt-cola",
+      "price": "14.99",
+      "stock": "18",
+      "taxCategory": "BOCKER"
     }
   ],
   "rates": [

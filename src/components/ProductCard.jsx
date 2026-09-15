@@ -1,8 +1,12 @@
 import { Link } from "react-router";
 import { useCart } from "../context/CartContext";
+import { useCurrency } from "../context/CurrencyContext";
+import { useCalculatedPrice } from "../hooks/useCalculatedPrice";
 
 export default function ProductCard({ product }) {
   const { addToCart } = useCart();
+  const { currency } = useCurrency();
+  const { finalPrice, loading } = useCalculatedPrice(product, currency);
 
   return (
     <div className=" bg-slate-400/40  backdrop-blur-2xl border border-white/10 shadow-lg p-6 flex flex-col gap-2 min-h-96 transition hover:scale-105 hover:bg-white/40">
@@ -10,7 +14,9 @@ export default function ProductCard({ product }) {
 
       <h3 className="text-xl font-semibold italic">{product.name}</h3>
 
-      <p className="text-lg font-bold">{product.price} kr</p>
+      <p className="text-lg font-bold">
+        {loading ? "..." : `${finalPrice.toFixed(2)} ${currency}`}
+      </p>
 
       <p className="text-sm italic opacity-70">Only {product.stock} left!</p>
 
