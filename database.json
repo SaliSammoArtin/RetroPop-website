@@ -36,5 +36,36 @@
       "price": 1249,
       "stock": 2
     }
+  ],
+
+  "campaigns": [
+    {
+      "code": "SOMMAR10",
+      "type": "percentage",
+      "name": "Sommarrea",
+      "description": "10% rabatt på hela köpet",
+      "campaignCode": "SOMMAR10",
+      "percentage": 10
+    },
+    {
+    "code": "HANDLA500",
+    "type": "threshold",
+    "name": "Handla mycket, spara mer",
+    "description": "10% rabatt när du handlar för minst 500 kr",
+    "campaignCode": "HANDLA500",
+    "percentage": 10,
+    "threshold": 500
+  },
+  {
+    "code": "3FOR2",
+    "type": "buyXforY",
+    "name": "3 för 2",
+    "description": "Köp 3 av en vara, betala bara för 2",
+    "campaignCode": "3FOR2",
+    "x": 3,
+    "y": 2,
+    "productId": "1"
+  }
+
   ]
 }

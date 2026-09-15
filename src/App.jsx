@@ -2,6 +2,7 @@ import { Outlet } from "react-router";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import CartView from "./components/CartView";
+import CampaignTestForm from "./components/CampaignTestForm"; // test som ska bort sedan
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         </header>
         {}
         <Outlet />
+        <CampaignTestForm />
       </div>
       <CartView />
       {}
