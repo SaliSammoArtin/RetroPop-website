@@ -1,1 +1,1 @@
-export { default as InventoryService } from "./services/inventoryService.js";
+export { default } from "./services/inventoryService.js";
