@@ -10,6 +10,8 @@ export default function Cart() {
 
   async function handleOrderSubmit(customerData) {
     const order = {
+      name: customerData.name,
+      email: customerData.email,
       items: cartItems,
       total: totalPrice
     };

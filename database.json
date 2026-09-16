@@ -47,7 +47,48 @@
       "name": "Linus",
       "email": "kjsad@jkb",
       "id": "psDm_91E-1Q"
+    },
+    {
+      "items": [
+        {
+          "id": "2",
+          "name": "VHS",
+          "price": 249,
+          "stock": 70,
+          "quantity": 1
+        },
+        {
+          "id": "1",
+          "name": "CD",
+          "price": 299,
+          "stock": 6000,
+          "quantity": 1
+        }
+      ],
+      "total": 548,
+      "id": "-6sPn1BNHwk"
+    },
+    {
+      "name": "wef",
+      "email": "fdg@lkn",
+      "items": [
+        {
+          "id": "2",
+          "name": "VHS",
+          "price": 249,
+          "stock": 70,
+          "quantity": 1
+        },
+        {
+          "id": "1",
+          "name": "CD",
+          "price": 299,
+          "stock": 6000,
+          "quantity": 1
+        }
+      ],
+      "total": 548,
+      "id": "a9juu-UTi0E"
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }
