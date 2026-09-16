@@ -89,6 +89,22 @@
       ],
       "total": 548,
       "id": "a9juu-UTi0E"
+    },
+    {
+      "name": "sdgf",
+      "email": "asd@sdf",
+      "items": [
+        {
+          "id": "1",
+          "name": "CD",
+          "price": 299,
+          "stock": 6000,
+          "quantity": 1
+        }
+      ],
+      "total": 299,
+      "id": "ibx4uPRtKPc"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
