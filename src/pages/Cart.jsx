@@ -3,6 +3,7 @@ import { CartContext } from "../context/CartContext";
 import CartItems from "../components/CheckoutItems";
 import CustomerInfoForm from '../components/CustomerInfoForm';
 import { useNavigate } from "react-router";
+import ShippingQuotes from "../components/ShippingQuotes.jsx";
 
 export default function Cart() {
   const { cartItems, totalPrice } = useContext(CartContext);
@@ -36,10 +37,13 @@ export default function Cart() {
 
       <h2>Total: {totalPrice.toFixed(2)}kr</h2>
 
+      <ShippingQuotes />
+
       <CustomerInfoForm
         onSubmit={handleOrderSubmit}
         sendButtonLabel="Confirm purchase!"
       />
+
     </div>
   );
 }

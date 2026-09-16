@@ -1,5 +1,6 @@
 import { useCart } from "../context/CartContext";
 
+
 export default function CartItems({ items }) {
   const { addToCart, removeFromCart } = useCart();
   return (

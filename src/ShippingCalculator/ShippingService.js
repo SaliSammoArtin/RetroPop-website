@@ -19,13 +19,13 @@ export default class ShippingService {
   }
 
   async getCarriers() {
+    const response = await fetch("/api/carriers");
 
     if (!response.ok) {
       throw new Error("Kunde inte hämta transportörer");
     }
 
 
-    const response = await fetch("/api/carriers");
     const data = await response.json();
 
     return data.map(carrierData => new Carrier(carrierData));
