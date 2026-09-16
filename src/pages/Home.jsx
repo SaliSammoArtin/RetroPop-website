@@ -1,10 +1,10 @@
-import Products from "../pages/Products";
+import Hero from "../components/Hero";
 
 export default function Home() {
   return (
     <>
       <main>
-        <Products />
+        <Hero />
       </main>
     </>
   );

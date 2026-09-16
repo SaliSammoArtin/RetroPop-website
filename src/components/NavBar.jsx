@@ -6,7 +6,7 @@ export default function NavBar() {
   const { openCart } = useCart();
   return (
     <nav>
-      <div className=" mb-6 flex w-full bg-retro-green-text border-b border-retro-yellow-highlight text-retro-cream-bg">
+      <div className=" mb-6 flex w-full bg-retro-green-text border-b-4 border-retro-yellow-highlight text-retro-cream-bg font-black tracking-wide">
         <div className=" m-3 ml-4 p-3 text-xl">
           <Link to="/" className="p-3 hover:text-retro-yellow-highlight">
             Homepage
