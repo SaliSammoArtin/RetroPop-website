@@ -5,7 +5,7 @@
       "name": "CD",
       "price": 299,
       "stock": 6000,
-      "taxCategory": "STANDARD"
+      "taxCategory": "STANDARD",
       "width": 15,
       "height": 15,
       "length": 1,
@@ -16,7 +16,7 @@
       "name": "VHS",
       "price": 249,
       "stock": 70,
-      "taxCategory": "STANDARD"
+      "taxCategory": "STANDARD",
       "width": 3,
       "height": 15,
       "length": 25,
@@ -27,7 +27,7 @@
       "name": "Kassettband",
       "price": 499,
       "stock": 40,
-      "taxCategory": "STANDARD"
+      "taxCategory": "STANDARD",
       "width": 3,
       "height": 15,
       "length": 1,
@@ -38,7 +38,7 @@
       "name": "Vinyl",
       "price": 359,
       "stock": 40,
-      "taxCategory": "STANDARD"
+      "taxCategory": "STANDARD",
       "width": 12,
       "height": 12,
       "length": 1,
@@ -49,7 +49,7 @@
       "name": "DVD",
       "price": 149,
       "stock": 100,
-      "taxCategory": "STANDARD"
+      "taxCategory": "STANDARD",
       "width": 15,
       "height": 15,
       "length": 1,
@@ -60,7 +60,11 @@
       "name": "Grammofon",
       "price": 1249,
       "stock": 2,
-      "taxCategory": "STANDARD"
+      "taxCategory": "STANDARD",
+      "width": 30,
+      "height": 30,
+      "length": 1,
+      "weight": 1
     },
     {
       "id": "7",
@@ -72,30 +76,83 @@
     {
       "id": "8",
       "name": "Jolt-cola",
-      "price": "14.99",
-      "stock": "18",
-      "taxCategory": "BOCKER"
+      "price": 14.99,
+      "stock": 18,
+      "taxCategory": "LIVSMEDEL"
     }
   ],
   "rates": [
-    { "id": "1", "from": "SEK", "to": "NOK", "rate": 1.01 },
-    { "id": "2", "from": "SEK", "to": "EUR", "rate": 0.087 },
-    { "id": "3", "from": "SEK", "to": "DKK", "rate": 0.65 },
-    { "id": "4", "from": "NOK", "to": "SEK", "rate": 0.99 },
-    { "id": "5", "from": "NOK", "to": "EUR", "rate": 0.086 },
-    { "id": "6", "from": "NOK", "to": "DKK", "rate": 0.64 },
-    { "id": "7", "from": "EUR", "to": "SEK", "rate": 11.5 },
-    { "id": "8", "from": "EUR", "to": "NOK", "rate": 11.6 },
-    { "id": "9", "from": "EUR", "to": "DKK", "rate": 7.46 },
-    { "id": "10", "from": "DKK", "to": "SEK", "rate": 1.54 },
-    { "id": "11", "from": "DKK", "to": "NOK", "rate": 1.56 },
-    { "id": "12", "from": "DKK", "to": "EUR", "rate": 0.134 }
-  ]
-}
-      "width": 30,
-      "height": 30,
-      "length": 1,
-      "weight": 1.0
+    {
+      "id": "1",
+      "from": "SEK",
+      "to": "NOK",
+      "rate": 1.01
+    },
+    {
+      "id": "2",
+      "from": "SEK",
+      "to": "EUR",
+      "rate": 0.087
+    },
+    {
+      "id": "3",
+      "from": "SEK",
+      "to": "DKK",
+      "rate": 0.65
+    },
+    {
+      "id": "4",
+      "from": "NOK",
+      "to": "SEK",
+      "rate": 0.99
+    },
+    {
+      "id": "5",
+      "from": "NOK",
+      "to": "EUR",
+      "rate": 0.086
+    },
+    {
+      "id": "6",
+      "from": "NOK",
+      "to": "DKK",
+      "rate": 0.64
+    },
+    {
+      "id": "7",
+      "from": "EUR",
+      "to": "SEK",
+      "rate": 11.5
+    },
+    {
+      "id": "8",
+      "from": "EUR",
+      "to": "NOK",
+      "rate": 11.6
+    },
+    {
+      "id": "9",
+      "from": "EUR",
+      "to": "DKK",
+      "rate": 7.46
+    },
+    {
+      "id": "10",
+      "from": "DKK",
+      "to": "SEK",
+      "rate": 1.54
+    },
+    {
+      "id": "11",
+      "from": "DKK",
+      "to": "NOK",
+      "rate": 1.56
+    },
+    {
+      "id": "12",
+      "from": "DKK",
+      "to": "EUR",
+      "rate": 0.134
     }
   ],
   "orders": [
@@ -165,32 +222,98 @@
       ],
       "total": 299,
       "id": "ibx4uPRtKPc"
+    },
+    {
+      "name": "Leo",
+      "email": "hasj@sadjkl",
+      "items": [
+        {
+          "id": "2",
+          "name": "VHS",
+          "price": 249,
+          "stock": 70,
+          "taxCategory": "STANDARD",
+          "width": 3,
+          "height": 15,
+          "length": 25,
+          "weight": 0.3,
+          "quantity": 2
+        },
+        {
+          "id": "1",
+          "name": "CD",
+          "price": 299,
+          "stock": 6000,
+          "taxCategory": "STANDARD",
+          "width": 15,
+          "height": 15,
+          "length": 1,
+          "weight": 0.1,
+          "quantity": 2
+        }
+      ],
+      "total": 1370,
+      "id": "sLnO9qS5GpY"
+    },
+    {
+      "name": "Leo",
+      "email": "asdlklkjklkas@ajsdiljl",
+      "items": [
+        {
+          "id": "8",
+          "name": "Jolt-cola",
+          "price": 14.99,
+          "stock": 18,
+          "taxCategory": "LIVSMEDEL",
+          "quantity": 1
+        },
+        {
+          "id": "7",
+          "name": "Bok",
+          "price": 199,
+          "stock": 25,
+          "taxCategory": "BOCKER",
+          "quantity": 1
+        },
+        {
+          "id": "2",
+          "name": "VHS",
+          "price": 249,
+          "stock": 70,
+          "taxCategory": "STANDARD",
+          "width": 3,
+          "height": 15,
+          "length": 25,
+          "weight": 0.3,
+          "quantity": 1
+        }
+      ],
+      "total": 538.9788,
+      "id": "1XM33ff2Wh0"
     }
   ],
-  "$schema": "./node_modules/json-server/schema.json"
   "carriers": [
     {
-      "id": 1,
+      "id": "1",
       "name": "PostNord",
       "pricingModel": "weight",
       "basePrice": 49,
       "pricePerKg": 12
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "DHL",
       "pricingModel": "weight",
       "basePrice": 59,
       "pricePerKg": 10
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "UPS",
       "pricingModel": "weight",
       "basePrice": 39,
       "pricePerKg": 15
     }
   ],
-  "orders": []
+  "$schema": "./node_modules/json-server/schema.json"
 }
-
