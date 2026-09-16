@@ -13,7 +13,8 @@ export default class TaxAndCurrencyCalc {
           "category: string",
           "targetCurrency?: string",
         ],
-        output: "{ originalPrice, taxRate, finalPrice, finalMoney }",
+        output:
+          "{ originalPrice, taxRate, taxAmount, finalPrice, finalMoney }",
       },
       {
         method: "getTaxRate",
@@ -68,11 +69,15 @@ export default class TaxAndCurrencyCalc {
 
     const moneyWithTax = this.#taxTable.applyTax(baseMoney, taxCategory);
 
-    const finalMoney = await this.convertCurrency(moneyWithTax, targetCurrency);
+    const [convertedOriginal, finalMoney] = await Promise.all([
+      this.convertCurrency(baseMoney, targetCurrency),
+      this.convertCurrency(moneyWithTax, targetCurrency),
+    ]);
 
     return {
-      originalPrice: baseMoney.amount,
+      originalPrice: convertedOriginal.amount,
       taxRate: this.#taxTable.getRate(taxCategory),
+      taxAmount: finalMoney.amount - convertedOriginal.amount,
       finalPrice: finalMoney.amount,
       finalMoney: finalMoney,
     };

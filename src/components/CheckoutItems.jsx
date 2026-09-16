@@ -1,14 +1,33 @@
 import { useCart } from "../context/CartContext";
-
+import { useCurrency } from "../context/CurrencyContext";
+import { useCalculatedPrice } from "../hooks/useCalculatedPrice";
 export default function CartItems({ items }) {
   const { addToCart, removeFromCart, deleteFromCart } = useCart();
+  const { currency } = useCurrency();
+  const { originalPrice, taxAmount, finalPrice, loading } = useCalculatedPrice(
+    items,
+    currency,
+  );
   return (
     <div className=" bg-slate-400/40 border border-white/10 flex justify-between p-8 m-4">
       <div className=" flex-1 ">
         <p className="text-2xl">{items.name}</p>
-        <p>Price: {items.price}</p>
         <p>Quantity: {items.quantity}</p>
-        <p>Subtotal: {(items.price * items.quantity).toFixed(2)} kr</p>
+        {loading ?
+          <p>Price: ...</p>
+        : <>
+            <p>
+              Price (excl. tax): {originalPrice.toFixed(2)} {currency}
+            </p>
+            <p>
+              Tax: {taxAmount.toFixed(2)} {currency}
+            </p>
+            <p>
+              Subtotal (incl. tax): {(finalPrice * items.quantity).toFixed(2)}{" "}
+              {currency}
+            </p>
+          </>
+        }
       </div>
       <div className="flex items-center p-8 gap-4">
         <button

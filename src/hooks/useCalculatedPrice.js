@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import Modules from "../modules/moduleMaker.js";
 
 export function useCalculatedPrice(product, currency) {
-  const [finalPrice, setFinalPrice] = useState(null);
+  const [priceBreakdown, setPriceBreakdown] = useState({
+    originalPrice: "",
+    taxRate: "",
+    taxAmount: "",
+    finalPrice: "",
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -19,7 +24,14 @@ export function useCalculatedPrice(product, currency) {
       currency,
     )
       .then((result) => {
-        if (!cancelled) setFinalPrice(result.finalPrice);
+        if (!cancelled) {
+          setPriceBreakdown({
+            originalPrice: result.originalPrice,
+            taxRate: result.taxRate,
+            taxAmount: result.taxAmount,
+            finalPrice: result.finalPrice,
+          });
+        }
       })
       .catch((err) => {
         if (!cancelled) setError(err);
@@ -33,5 +45,5 @@ export function useCalculatedPrice(product, currency) {
     };
   }, [product?.price, product?.taxCategory, currency]);
 
-  return { finalPrice, loading, error };
+  return { ...priceBreakdown, loading, error };
 }

@@ -1,9 +1,13 @@
 import { useCart } from "../context/CartContext";
+import { useCurrency } from "../context/CurrencyContext";
+import { useCartTotal } from "../hooks/useCartTotal";
 import { Link } from "react-router";
 import CheckoutItems from "./CheckoutItems";
 
 export default function ShoppingCart() {
-  const { isCartOpen, closeCart, cartItems, totalPrice } = useCart();
+  const { isCartOpen, closeCart, cartItems } = useCart();
+  const { currency } = useCurrency();
+  const { total, loading: totalLoading } = useCartTotal(cartItems, currency);
 
   if (!isCartOpen) return null;
   return (
@@ -35,7 +39,9 @@ export default function ShoppingCart() {
         : cartItems.map((item) => <CheckoutItems key={item.id} items={item} />)}
       </div>
       <div className="p-4 border-t border-white/10">
-        <h2 className="font-semibold">Total: {totalPrice.toFixed(2)} kr</h2>
+        <h2 className="font-semibold">
+          Total: {totalLoading ? "..." : `${total.toFixed(2)} ${currency}`}
+        </h2>
         <Link to={"/cart"} className="text-2xl hover:text-white/30">
           Checkout
         </Link>

@@ -1,6 +1,6 @@
 export class UnkwownCategoryError extends Error {
-  constructor(category) {
-    super(`Unknown category: ${category}.`);
+  constructor(taxCategory) {
+    super(`Unknown category: ${taxCategory}.`);
     this.name = "UnknownCategoryError";
   }
 }
@@ -12,15 +12,15 @@ export default class TaxTable {
     BOCKER: 0.06,
   };
 
-  getRate(category) {
-    const rate = this.#rates[category];
+  getRate(taxCategory) {
+    const rate = this.#rates[taxCategory];
     if (rate === undefined) {
-      throw new UnkwownCategoryError(category);
+      throw new UnkwownCategoryError(taxCategory);
     }
     return rate;
   }
 
-  applyTax(money, category) {
-    return money.addTax(this.getRate(category));
+  applyTax(money, taxCategory) {
+    return money.addTax(this.getRate(taxCategory));
   }
 }
