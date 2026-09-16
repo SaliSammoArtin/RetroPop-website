@@ -13,3 +13,10 @@ export default {
 
   /* more modules and descriptors can be added here */
 };
+
+
+//import ShippingModule from "./ShippingCalculator";
+
+//export default {
+// ...ShippingModule
+//}
