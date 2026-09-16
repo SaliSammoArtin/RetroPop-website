@@ -17,7 +17,7 @@ export default function ShoppingCart() {
         className="fixed inset-0 z-40 bg-black/40"
         aria-hidden="true"
       />
-      <aside className=" fixed inset-y-0 right-0  w-full max-w-md flex-col z-50 flex rounded-l-2xl bg-retro-green-text/35 backdrop-blur-2xl border border-retro-dark-text text-retro-cream-bg">
+      <aside className=" fixed inset-y-0 right-0  w-full max-w-md flex-col z-50 flex rounded-l-2xl bg-retro-green-text/35 backdrop-blur-2xl border border-retro-dark-text text-retro-cream-bg ">
         <div className="flex items-center justify-between p-4 border-b border-retro-cream-bg/20">
           <h2 className="text-xl font-semibold tracking-wide text-retro-orange-bg">
             Your cart!
@@ -50,13 +50,13 @@ export default function ShoppingCart() {
             ))
           }
         </div>
-        <div className="p-4 border-t border-retro-cream-bg/20">
+        <div className="p-4 border-t border-retro-cream-bg/20 ">
           <h2 className="font-semibold">
             Total: {totalLoading ? "..." : `${total.toFixed(2)} ${currency}`}
           </h2>{" "}
           <Link
             to={"/cart"}
-            className="text-2xl hover:text-retro-yellow-highlight"
+            className="text-2xl hover:text-retro-yellow-highlight text-retro-orange-bg"
             onClick={closeCart}>
             Checkout
           </Link>

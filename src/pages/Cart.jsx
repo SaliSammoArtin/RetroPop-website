@@ -13,8 +13,9 @@ export default function Cart() {
   const { currency } = useCurrency();
   const { cartItems } = useContext(CartContext);
   const { total, loading } = useCartTotal(cartItems, currency);
-  const [ discountResult, setDiscountResult] = useState(null);
-  const finalTotal = total - (discountResult ? discountResult.discountAmount : 0);
+  const [discountResult, setDiscountResult] = useState(null);
+  const finalTotal =
+    total - (discountResult ? discountResult.discountAmount : 0);
 
   const navigate = useNavigate();
 
@@ -38,14 +39,10 @@ export default function Cart() {
 
     await Promise.all(
       order.items.map((item) =>
-        moduleMaker.Inventory.createMovement(
-          item.id,
-          "OUT",
-          item.quantity,
-        ),
+        moduleMaker.Inventory.createMovement(item.id, "OUT", item.quantity),
       ),
     );
-    
+
     navigate("/");
   }
 
@@ -58,14 +55,13 @@ export default function Cart() {
       ))}
       <CampaignCodeField onDiscountApplied={setDiscountResult} />
       <h2>Total: {loading ? "..." : `${finalTotal.toFixed(2)} ${currency}`}</h2>
-      
+
       <ShippingQuotes />
 
       <CustomerInfoForm
         onSubmit={handleOrderSubmit}
         sendButtonLabel="Confirm purchase!"
       />
-
     </div>
   );
 }
