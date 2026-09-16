@@ -14,10 +14,11 @@ export default class Parcel {
   }
 
 
-  //getTotalVolume() {
-  //return this.cart.reduce((totalVolume, item) => {
-  //return totalVolume + item.width * item.height * item.length * item.quantity;
-  //}, 0);
+  getTotalVolume() {
+    return this.cart.reduce((totalVolume, item) => {
+      return totalVolume + item.width * item.height * item.length * item.quantity;
+    }, 0);
+  }
+
 
 }
-
