@@ -6,6 +6,10 @@
       "price": 299,
       "stock": 6000,
       "taxCategory": "STANDARD"
+      "width": 15,
+      "height": 15,
+      "length": 1,
+      "weight": 0.1
     },
     {
       "id": "2",
@@ -13,6 +17,10 @@
       "price": 249,
       "stock": 70,
       "taxCategory": "STANDARD"
+      "width": 3,
+      "height": 15,
+      "length": 25,
+      "weight": 0.3
     },
     {
       "id": "3",
@@ -20,6 +28,10 @@
       "price": 499,
       "stock": 40,
       "taxCategory": "STANDARD"
+      "width": 3,
+      "height": 15,
+      "length": 1,
+      "weight": 0.1
     },
     {
       "id": "4",
@@ -27,6 +39,10 @@
       "price": 359,
       "stock": 40,
       "taxCategory": "STANDARD"
+      "width": 12,
+      "height": 12,
+      "length": 1,
+      "weight": 0.2
     },
     {
       "id": "5",
@@ -34,6 +50,10 @@
       "price": 149,
       "stock": 100,
       "taxCategory": "STANDARD"
+      "width": 15,
+      "height": 15,
+      "length": 1,
+      "weight": 0.1
     },
     {
       "id": "6",
@@ -72,3 +92,105 @@
     { "id": "12", "from": "DKK", "to": "EUR", "rate": 0.134 }
   ]
 }
+      "width": 30,
+      "height": 30,
+      "length": 1,
+      "weight": 1.0
+    }
+  ],
+  "orders": [
+    {
+      "name": "Magdalena",
+      "email": "KLS@KJSND",
+      "id": "gDOLcN4biqQ"
+    },
+    {
+      "name": "Linus",
+      "email": "kjsad@jkb",
+      "id": "psDm_91E-1Q"
+    },
+    {
+      "items": [
+        {
+          "id": "2",
+          "name": "VHS",
+          "price": 249,
+          "stock": 70,
+          "quantity": 1
+        },
+        {
+          "id": "1",
+          "name": "CD",
+          "price": 299,
+          "stock": 6000,
+          "quantity": 1
+        }
+      ],
+      "total": 548,
+      "id": "-6sPn1BNHwk"
+    },
+    {
+      "name": "wef",
+      "email": "fdg@lkn",
+      "items": [
+        {
+          "id": "2",
+          "name": "VHS",
+          "price": 249,
+          "stock": 70,
+          "quantity": 1
+        },
+        {
+          "id": "1",
+          "name": "CD",
+          "price": 299,
+          "stock": 6000,
+          "quantity": 1
+        }
+      ],
+      "total": 548,
+      "id": "a9juu-UTi0E"
+    },
+    {
+      "name": "sdgf",
+      "email": "asd@sdf",
+      "items": [
+        {
+          "id": "1",
+          "name": "CD",
+          "price": 299,
+          "stock": 6000,
+          "quantity": 1
+        }
+      ],
+      "total": 299,
+      "id": "ibx4uPRtKPc"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+  "carriers": [
+    {
+      "id": 1,
+      "name": "PostNord",
+      "pricingModel": "weight",
+      "basePrice": 49,
+      "pricePerKg": 12
+    },
+    {
+      "id": 2,
+      "name": "DHL",
+      "pricingModel": "weight",
+      "basePrice": 59,
+      "pricePerKg": 10
+    },
+    {
+      "id": 3,
+      "name": "UPS",
+      "pricingModel": "weight",
+      "basePrice": 39,
+      "pricePerKg": 15
+    }
+  ],
+  "orders": []
+}
+
