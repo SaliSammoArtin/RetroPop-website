@@ -12,13 +12,3 @@ export default {
 
   /* more modules and descriptors can be added here */
 };
-<<<<<<< HEAD
-
-
-//import ShippingModule from "./ShippingCalculator";
-
-//export default {
-// ...ShippingModule
-//}
-=======
->>>>>>> c7f8298871a416f489b831f3462549369521a30f
