@@ -315,5 +315,16 @@
       "pricePerKg": 15
     }
   ],
+  "campaigns": [
+  {
+    "id": "1",
+    "code": "RETRO20",
+    "campaignCode": "RETRO20",
+    "name": "20% rabatt",
+    "description": "20% rabatt på hela beställningen",
+    "type": "percentage",
+    "percentage": 20
+  }
+],
   "$schema": "./node_modules/json-server/schema.json"
 }

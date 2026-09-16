@@ -1,5 +1,6 @@
 import PercentageDiscount from "./services/PercentageDiscount";
 
+
 export default class CampaignModule {
   // Statisk beskrivning av modulen, läsbar utan att skapa ett objekt.
   // Används av gruppens generiska formulärkomponent för att veta

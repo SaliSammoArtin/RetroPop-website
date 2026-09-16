@@ -4,6 +4,7 @@ import { useCurrency } from "../context/CurrencyContext";
 import { useCartTotal } from "../hooks/useCartTotal";
 import CartItems from "../components/CheckoutItems";
 import CustomerInfoForm from "../components/CustomerInfoForm";
+import CampaignCodeField from "../components/CampaignCodeField";
 import { useNavigate } from "react-router";
 
 export default function Cart() {
@@ -35,9 +36,9 @@ export default function Cart() {
       {cartItems.map((item) => (
         <CartItems key={item.id} items={item} />
       ))}
-
+      <CampaignCodeField />
       <h2>Total: {loading ? "..." : `${total.toFixed(2)} ${currency}`}</h2>
-
+      
       <CustomerInfoForm
         onSubmit={handleOrderSubmit}
         sendButtonLabel="Confirm purchase!"
