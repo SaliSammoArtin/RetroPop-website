@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useCart } from '../context/CartContext';
 import Modules from '../modules/moduleMaker.js';
 
-export default function CampaignCodeField() {
+export default function CampaignCodeField({ onDiscountApplied }) {
   const { cartItems } = useCart();
   const [campaignCode, setCampaignCode] = useState('');
   const [discountResult, setDiscountResult] = useState(null);
@@ -21,6 +21,7 @@ export default function CampaignCodeField() {
       cart: cartItems,
     });
     setDiscountResult(result);
+    onDiscountApplied(result);
   }
 
   return (

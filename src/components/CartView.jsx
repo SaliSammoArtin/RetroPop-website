@@ -3,7 +3,6 @@ import { useCurrency } from "../context/CurrencyContext";
 import { useCartTotal } from "../hooks/useCartTotal";
 import { Link } from "react-router";
 import CheckoutItems from "./CheckoutItems";
-import CampaignCodeField from "./CampaignCodeField";
 
 export default function ShoppingCart() {
   const { isCartOpen, closeCart, cartItems } = useCart();
@@ -40,7 +39,6 @@ export default function ShoppingCart() {
         : cartItems.map((item) => <CheckoutItems key={item.id} items={item} />)}
       </div>
       <div className="p-4 border-t border-white/10">
-      <CampaignCodeField />
         <h2 className="font-semibold">
           Total: {totalLoading ? "..." : `${total.toFixed(2)} ${currency}`}
         </h2>

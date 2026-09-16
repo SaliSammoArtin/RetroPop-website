@@ -3,7 +3,7 @@ import Discount from "./Discount";
 // extends Discount betyder att PercentageDiscount är en "typ av" Discount,
 // och automatiskt får tillgång till allt Discount har (fält och metoder),
 // men kan lägga till egna saker och skriva över metoder som calculate.
-class PercentageDiscount extends Discount {
+export default class PercentageDiscount extends Discount {
   constructor(name, description, campaignCode, percentage) {
     super(name, description, campaignCode);
     this.percentage = percentage;
@@ -23,4 +23,3 @@ class PercentageDiscount extends Discount {
   }
 }
 
-export default PercentageDiscount;
