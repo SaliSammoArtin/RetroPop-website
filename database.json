@@ -269,8 +269,8 @@
         },
         {
           "id": "7",
-          "name": "Bok",
-          "price": 199,
+          "name": "Javascript for Dummies",
+          "price": 1337,
           "stock": 25,
           "taxCategory": "BOCKER",
           "quantity": 1
