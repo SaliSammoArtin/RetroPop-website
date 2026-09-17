@@ -3,13 +3,22 @@ import { useCurrency } from "../context/CurrencyContext";
 import { useCartTotal } from "../hooks/useCartTotal";
 import { Link } from "react-router";
 import CheckoutItems from "./CheckoutItems";
+import Modules from "../modules/moduleMaker.js";
 
 export default function ShoppingCart() {
   const { isCartOpen, closeCart, cartItems, discountResult } = useCart();
   const { currency } = useCurrency();
-  const { total, loading: totalLoading } = useCartTotal(cartItems, currency);
-  const discountFraction = discountResult ? discountResult.discountAmount / discountResult.totalPrice : 0;
-  const finalTotal = total - (total * discountFraction);
+  const {
+    total,
+    totalOriginal,
+    totalTax,
+    loading: totalLoading,
+  } = useCartTotal(cartItems, currency);
+  const discountFraction =
+    discountResult ?
+      discountResult.discountAmount / discountResult.totalPrice
+    : 0;
+  const finalTotal = total - total * discountFraction;
 
   if (!isCartOpen) return null;
 
@@ -29,16 +38,14 @@ export default function ShoppingCart() {
           <button
             onClick={closeCart}
             aria-label="Close cart"
-            className="text-retro-cream-bg text-2xl hover:scale-125 hover:text-retro-orange-bg hover:cursor-pointer transition-colors p-1"
-          >
+            className="text-retro-cream-bg text-2xl hover:scale-125 hover:text-retro-orange-bg hover:cursor-pointer transition-colors p-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6"
-            >
+              className="size-6">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -49,29 +56,46 @@ export default function ShoppingCart() {
         </div>
 
         <div className="flex-1 overflow-y-auto scrollbar-thin [scrollbar-color:var(--color-retro-yellow-highlight)_transparent] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-retro-yellow-highlight [&::-webkit-scrollbar-thumb]:rounded-full">
-          {cartItems.length === 0 ? (
+          {cartItems.length === 0 ?
             <p className="p-4">Your cart is empty.</p>
-          ) : (
-            cartItems.map((item) => (
+          : cartItems.map((item) => (
               <CheckoutItems key={item.id} items={item} />
             ))
-          )}
+          }
         </div>
 
         <div className="p-4 border-t border-retro-cream-bg/20">
+          {!totalLoading && (
+            <div className="text-sm text-retro-cream-bg/80 mb-1">
+              <p>
+                Items (excl. tax):{" "}
+                {Modules.TaxAndCurrencyCalc.createMoney(
+                  totalOriginal,
+                  currency,
+                ).format()}
+              </p>
+              <p>
+                Tax:{" "}
+                {Modules.TaxAndCurrencyCalc.createMoney(
+                  totalTax,
+                  currency,
+                ).format()}
+              </p>
+            </div>
+          )}
           {discountResult && (
             <p className="text-retro-yellow-highlight mb-1">
               Rabatt: {(total * discountFraction).toFixed(2)} {currency}
             </p>
           )}
           <h2 className="font-semibold mb-2">
-            Total: {totalLoading ? "..." : `${finalTotal.toFixed(2)} ${currency}`}
+            Total:{" "}
+            {totalLoading ? "..." : `${finalTotal.toFixed(2)} ${currency}`}
           </h2>
           <Link
             to={"/cart"}
             className="text-2xl hover:text-retro-yellow-highlight text-retro-orange-bg inline-block"
-            onClick={closeCart}
-          >
+            onClick={closeCart}>
             Checkout
           </Link>
         </div>

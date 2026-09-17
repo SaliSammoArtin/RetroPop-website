@@ -1,13 +1,16 @@
 import { useCart } from "../context/CartContext";
 import { useCurrency } from "../context/CurrencyContext";
 import { useCalculatedPrice } from "../hooks/useCalculatedPrice";
+import Modules from "../modules/moduleMaker.js";
 export default function CartItems({ items }) {
   const { addToCart, removeFromCart, deleteFromCart } = useCart();
   const { currency } = useCurrency();
-  const { originalPrice, taxAmount, finalPrice, loading } = useCalculatedPrice(
-    items,
-    currency,
-  );
+  const { originalMoney, taxAmount, taxRate, finalMoney, loading } =
+    useCalculatedPrice(items, currency);
+
+  const subtotalMoney =
+    finalMoney &&
+    Modules.TaxAndCurrencyCalc.scaleMoney(finalMoney, items.quantity);
   return (
     <div className="bg-retro-cream-bg text-retro-green-text border-2 border-retro-yellow-highlight rounded-xl shadow-lg max-w-2xl flex flex-col sm:flex-row sm:justify-between p-4 sm:p-8 m-4 font-black tracking-wide">
       <div className=" flex-1 ">
@@ -16,16 +19,15 @@ export default function CartItems({ items }) {
         {loading ?
           <p>Price: ...</p>
         : <>
+            <p>Price (excl. tax): {originalMoney.format()}</p>
             <p>
-              Price (excl. tax): {originalPrice.toFixed(2)} {currency}
+              Tax ({(taxRate * 100).toFixed(0)}%):{" "}
+              {Modules.TaxAndCurrencyCalc.createMoney(
+                taxAmount,
+                currency,
+              ).format()}
             </p>
-            <p>
-              Tax: {taxAmount.toFixed(2)} {currency}
-            </p>
-            <p>
-              Subtotal (incl. tax): {(finalPrice * items.quantity).toFixed(2)}{" "}
-              {currency}
-            </p>
+            <p>Subtotal (incl. tax): {subtotalMoney.format()}</p>
           </>
         }
       </div>

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import { useCurrency } from "../context/CurrencyContext";
 import { useCartTotal } from "../hooks/useCartTotal";
@@ -12,11 +12,35 @@ import ShippingQuotes from "../components/ShippingQuotes.jsx";
 export default function Cart() {
   const { currency } = useCurrency();
   const { cartItems, discountResult, shippingQuote } = useContext(CartContext);
-  const { total, loading } = useCartTotal(cartItems, currency);
-  const discountFraction = discountResult ? discountResult.discountAmount / discountResult.totalPrice : 0;
+  const { total, totalOriginal, totalTax, loading } = useCartTotal(
+    cartItems,
+    currency,
+  );
 
-  const discountedTotal = total - (total * discountFraction);
-  const shippingCost = shippingQuote?.price || 0;
+  const [shippingRate, setShippingRate] = useState(1);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    moduleMaker.TaxAndCurrencyCalc.convertCurrency(
+      moduleMaker.TaxAndCurrencyCalc.createMoney(1, "SEK"),
+      currency,
+    ).then((money) => {
+      if (!cancelled) setShippingRate(money.amount);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [currency]);
+
+  const shippingCost = (shippingQuote?.price || 0) * shippingRate;
+  const discountFraction =
+    discountResult ?
+      discountResult.discountAmount / discountResult.totalPrice
+    : 0;
+
+  const discountedTotal = total - total * discountFraction;
   const finalTotal = discountedTotal + shippingCost;
 
   const navigate = useNavigate();
@@ -61,22 +85,36 @@ export default function Cart() {
             <p className="bg-retro-cream-bg text-retro-green-text border-2 border-retro-yellow-highlight rounded-xl shadow-lg p-8 font-black tracking-wide text-center">
               Your cart is empty.
             </p>
-            : cartItems.map((item) => <CartItems key={item.id} items={item} />)}
+          : cartItems.map((item) => <CartItems key={item.id} items={item} />)}
 
           {cartItems.length > 0 && (
             <div className="fixed bottom-4 right-4 sm:right-6 z-50 bg-retro-green-text text-retro-cream-bg rounded-xl border-3 border-retro-yellow-highlight p-3 sm:p-4 flex flex-col items-end shadow-2xl">
+              {!loading && (
+                <p className="text-xs text-retro-cream-bg/70">
+                  {moduleMaker.TaxAndCurrencyCalc.createMoney(
+                    totalOriginal,
+                    currency,
+                  ).format()}{" "}
+                  +{" "}
+                  {moduleMaker.TaxAndCurrencyCalc.createMoney(
+                    totalTax,
+                    currency,
+                  ).format()}{" "}
+                  moms
+                </p>
+              )}
               {discountResult && (
                 <p className="text-sm font-medium text-retro-cream-bg">
-                  Discount: -{(total * discountFraction).toFixed(2)}{" "}
-                  {currency}
+                  Discount: -{(total * discountFraction).toFixed(2)} {currency}
                 </p>
               )}
 
               {shippingQuote && (
                 <p className="text-sm font-medium text-retro-cream-bg">
-                  Shipping: {shippingQuote.price.toFixed(2)} {currency}
+                  Shipping: {shippingCost.toFixed(2)} {currency}
                 </p>
               )}
+
               <p className="text-2xl font-black tracking-wide text-retro-orange-bg">
                 {loading ? "..." : `${finalTotal.toFixed(2)} ${currency}`}
               </p>

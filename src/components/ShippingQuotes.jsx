@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
 import { useCurrency } from "../context/CurrencyContext";
 import { useCartTotal } from "../hooks/useCartTotal";
@@ -22,6 +22,22 @@ export default function ShippingQuotes() {
   const [selectedCarrier, setSelectedCarrier] = useState("");
   const [selectedQuote, setSelectedQuote] = useState(null);
   const [error, setError] = useState("");
+  const [shippingRate, setShippingRate] = useState(1);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    moduleMaker.TaxAndCurrencyCalc.convertCurrency(
+      moduleMaker.TaxAndCurrencyCalc.createMoney(1, "SEK"),
+      currency,
+    ).then((money) => {
+      if (!cancelled) setShippingRate(money.amount);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [currency]);
 
   function validatePostalCode() {
     if (postalCode.trim() === "") {
@@ -133,7 +149,7 @@ export default function ShippingQuotes() {
                 </div>
 
                 <span className="font-black text-retro-green-text">
-                  {quote.price} kr
+                  {(quote.price * shippingRate).toFixed(2)} {currency}
                 </span>
               </div>
             </label>
@@ -141,7 +157,8 @@ export default function ShippingQuotes() {
 
           {selectedQuote && (
             <p className="font-black tracking-wide text-retro-green-text pt-2 border-t-2 border-retro-yellow-highlight">
-              Shipping: {selectedQuote.price.toFixed(2)} {currency}
+              Shipping: {(selectedQuote.price * shippingRate).toFixed(2)}{" "}
+              {currency}
             </p>
           )}
         </>
