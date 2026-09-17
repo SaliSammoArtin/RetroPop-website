@@ -2,31 +2,6 @@ import StockMovement from "../models/stockMovement.js";
 
 export default class InventoryService {
 
-  static descriptor = {
-    name: "Inventory",
-    methodsAndInputs: [
-      {
-        method: "run",
-        input: [],
-        output: ["inventory report"],
-      },
-    ],
-  };
-
-  async run() {
-    const productsResponse = await fetch("/api/products");
-    const movementsResponse = await fetch("/api/stockMovements");
-
-    if (!productsResponse.ok || !movementsResponse.ok) {
-      throw new Error("Kunde inte hämta lagerinformationen");
-    }
-
-    const items = await productsResponse.json();
-    const movements = await movementsResponse.json();
-
-    return this.buildReport(items, movements);
-  }
-
   //Kontrollerarar om saldot är lågt
   isLowStock(stock, reorderPoint = 5) {
     return stock <= reorderPoint;
