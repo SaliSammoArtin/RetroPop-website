@@ -103,9 +103,9 @@ export default class CampaignModule {
 
     // Skickar tillbaka resultatet till den som anropade run()
     return {
-      totalPrice: totalPrice,
-      discountAmount: discountAmount,
-      finalPrice: finalPrice,
+      totalPrice: Math.round(totalPrice * 100) / 100,
+      discountAmount: Math.round(discountAmount * 100) / 100,
+      finalPrice: Math.round(finalPrice * 100) / 100,
     };
   }
 }
