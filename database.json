@@ -292,24 +292,24 @@
       "id": "1XM33ff2Wh0"
     },
     {
-      "name": "11232313",
-      "email": "123123@dsajkljdas",
+      "name": "Dessi",
+      "email": "claude@ai",
       "items": [
         {
-          "id": "2",
-          "name": "VHS",
-          "price": 249,
-          "stock": 70,
+          "id": "1",
+          "name": "CD",
+          "price": 299,
+          "stock": 6000,
           "taxCategory": "STANDARD",
-          "width": 3,
+          "width": 15,
           "height": 15,
-          "length": 25,
-          "weight": 0.3,
+          "length": 1,
+          "weight": 0.1,
           "quantity": 1
         }
       ],
-      "total": 311.25,
-      "id": "NEoePHCJEWc"
+      "total": 313.95,
+      "id": "GxpboNesyfA"
     }
   ],
   "stockMovements": [],
@@ -336,5 +336,37 @@
       "pricePerKg": 15
     }
   ],
+  "campaigns": [
+  {
+    "id": "1",
+    "code": "RETRO20",
+    "campaignCode": "RETRO20",
+    "name": "20% rabatt",
+    "description": "20% rabatt på hela beställningen",
+    "type": "percentage",
+    "percentage": 20
+  },
+  {
+    "id": "2",
+    "code": "3FOR2",
+    "campaignCode": "3FOR2",
+    "name": "3 för 2 på CD",
+    "description": "Köp 3 CD-skivor, betala bara för 2",
+    "type": "buyXForY",
+    "x": 3,
+    "y": 2,
+    "productId": "1"
+  },
+  {
+    "id": "3",
+    "code": "HANDLA500",
+    "campaignCode": "HANDLA500",
+    "name": "Handla för 500, spara 10%",
+    "description": "10% rabatt när du handlar för minst 500 kr",
+    "type": "threshold",
+    "percentage": 10,
+    "threshold": 500
+  }
+],
   "$schema": "./node_modules/json-server/schema.json"
 }
