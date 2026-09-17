@@ -9,7 +9,7 @@ export default function CartItems({ items }) {
     currency,
   );
   return (
-    <div className=" bg-retro-cream-bg text-retro-green-text border-2 border-retro-yellow-highlight rounded-xl shadow-lg max-w-2xl flex flex-col sm:flex-row sm:justify-between p-4 sm:p-8 m-4 font-black tracking-wide">
+    <div className="bg-retro-cream-bg text-retro-green-text border-2 border-retro-yellow-highlight rounded-xl shadow-lg max-w-2xl flex flex-col sm:flex-row sm:justify-between p-4 sm:p-8 m-4 font-black tracking-wide">
       <div className=" flex-1 ">
         <p className="text-2xl">{items.name}</p>
         <p>Quantity: {items.quantity}</p>

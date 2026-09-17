@@ -6,7 +6,7 @@ export default function CustomerInfoForm({
   sendButtonLabel = "Continue",
 }) {
   return (
-    <div className="bg-retro-green-text rounded-2xl border-4 border-retro-yellow-highlight p-6">
+    <div className="bg-retro-green-text text-retro-cream-bg rounded-2xl border-4 border-retro-yellow-highlight p-6">
       <h2 className="text-2xl font-black tracking-wide text-retro-orange-bg mb-4">
         Your details
       </h2>
