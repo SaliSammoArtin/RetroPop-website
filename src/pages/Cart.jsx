@@ -58,10 +58,12 @@ export default function Cart() {
 
       <ShippingQuotes />
 
-      <CustomerInfoForm
-        onSubmit={handleOrderSubmit}
-        sendButtonLabel="Confirm purchase!"
-      />
+      <div className="md:col-start-8 md:col-span-5 md:ml-8">
+        <CustomerInfoForm
+          onSubmit={handleOrderSubmit}
+          sendButtonLabel="Confirm purchase!"
+        />
+      </div>
     </div>
   );
 }

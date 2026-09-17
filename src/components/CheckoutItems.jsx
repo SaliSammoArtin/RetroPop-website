@@ -9,7 +9,7 @@ export default function CartItems({ items }) {
     currency,
   );
   return (
-    <div className=" bg-retro-cream-bg text-retro-green-text border-2 border-retro-yellow-highlight rounded-xl shadow-lg max-w-2xl flex justify-between p-8 m-4 font-black tracking-wide">
+    <div className=" bg-retro-cream-bg text-retro-green-text border-2 border-retro-yellow-highlight rounded-xl shadow-lg max-w-2xl flex flex-col sm:flex-row sm:justify-between p-4 sm:p-8 m-4 font-black tracking-wide">
       <div className=" flex-1 ">
         <p className="text-2xl">{items.name}</p>
         <p>Quantity: {items.quantity}</p>
@@ -29,7 +29,7 @@ export default function CartItems({ items }) {
           </>
         }
       </div>
-      <div className="flex items-center p-8 gap-4">
+      <div className="flex items-center p-2 sm:p-8 gap-4">
         <button
           className="hover:scale-125 hover:text-retro-yellow-highlight hover:cursor-pointer transition-colors p-1 text-2xl"
           onClick={() => addToCart(items)}
