@@ -12,7 +12,10 @@ import ShippingQuotes from "../components/ShippingQuotes.jsx";
 export default function Cart() {
   const { currency } = useCurrency();
   const { cartItems, discountResult } = useContext(CartContext);
-  const { total, loading } = useCartTotal(cartItems, currency);
+  const { total, totalOriginal, totalTax, loading } = useCartTotal(
+    cartItems,
+    currency,
+  );
   const discountFraction = discountResult ? discountResult.discountAmount / discountResult.totalPrice : 0;
   const finalTotal = total - (total * discountFraction);
 
@@ -61,6 +64,20 @@ export default function Cart() {
 
           {cartItems.length > 0 && (
             <div className="fixed bottom-4 right-4 sm:right-6 z-50 bg-retro-green-text text-retro-cream-bg rounded-xl border-3 border-retro-yellow-highlight p-3 sm:p-4 flex flex-col items-end shadow-2xl">
+              {!loading && (
+                <p className="text-xs text-retro-cream-bg/70">
+                  {moduleMaker.TaxAndCurrencyCalc.createMoney(
+                    totalOriginal,
+                    currency,
+                  ).format()}{" "}
+                  +{" "}
+                  {moduleMaker.TaxAndCurrencyCalc.createMoney(
+                    totalTax,
+                    currency,
+                  ).format()}{" "}
+                  moms
+                </p>
+              )}
               {discountResult && (
                 <p className="text-sm font-medium text-retro-cream-bg">
                   Discount: -{(total * discountFraction).toFixed(2)}{" "}

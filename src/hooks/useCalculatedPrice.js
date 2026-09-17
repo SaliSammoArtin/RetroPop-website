@@ -4,9 +4,11 @@ import Modules from "../modules/moduleMaker.js";
 export function useCalculatedPrice(product, currency) {
   const [priceBreakdown, setPriceBreakdown] = useState({
     originalPrice: "",
+    originalMoney: null,
     taxRate: "",
     taxAmount: "",
     finalPrice: "",
+    finalMoney: null,
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -27,9 +29,11 @@ export function useCalculatedPrice(product, currency) {
         if (!cancelled) {
           setPriceBreakdown({
             originalPrice: result.originalPrice,
+            originalMoney: result.originalMoney,
             taxRate: result.taxRate,
             taxAmount: result.taxAmount,
             finalPrice: result.finalPrice,
+            finalMoney: result.finalMoney,
           });
         }
       })
