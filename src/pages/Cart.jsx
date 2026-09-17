@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import { useCurrency } from "../context/CurrencyContext";
 import { useCartTotal } from "../hooks/useCartTotal";
@@ -16,13 +16,31 @@ export default function Cart() {
     cartItems,
     currency,
   );
+
+  const [shippingRate, setShippingRate] = useState(1);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    moduleMaker.TaxAndCurrencyCalc.convertCurrency(
+      moduleMaker.TaxAndCurrencyCalc.createMoney(1, "SEK"),
+      currency,
+    ).then((money) => {
+      if (!cancelled) setShippingRate(money.amount);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [currency]);
+
+  const shippingCost = (shippingQuote?.price || 0) * shippingRate;
   const discountFraction =
     discountResult ?
       discountResult.discountAmount / discountResult.totalPrice
     : 0;
 
   const discountedTotal = total - total * discountFraction;
-  const shippingCost = shippingQuote?.price || 0;
   const finalTotal = discountedTotal + shippingCost;
 
   const navigate = useNavigate();
@@ -93,15 +111,10 @@ export default function Cart() {
 
               {shippingQuote && (
                 <p className="text-sm font-medium text-retro-cream-bg">
-                  Shipping: {shippingQuote.price.toFixed(2)} {currency}
+                  Shipping: {shippingCost.toFixed(2)} {currency}
                 </p>
               )}
 
-              {shippingQuote && (
-                <p className="text-sm font-medium text-retro-cream-bg">
-                  Shipping: {shippingQuote.price.toFixed(2)} {currency}
-                </p>
-              )}
               <p className="text-2xl font-black tracking-wide text-retro-orange-bg">
                 {loading ? "..." : `${finalTotal.toFixed(2)} ${currency}`}
               </p>
