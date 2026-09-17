@@ -5,6 +5,7 @@ import { useCartTotal } from "../hooks/useCartTotal";
 import CartItems from "../components/CheckoutItems";
 import CustomerInfoForm from "../components/CustomerInfoForm";
 import { useNavigate } from "react-router";
+import moduleMaker from "../modules/moduleMaker";
 
 export default function Cart() {
   const { currency } = useCurrency();
@@ -20,11 +21,26 @@ export default function Cart() {
       total,
     };
 
-    await fetch("http://localhost:3000/orders", {
+    const response = await fetch("/api/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(order),
     });
+
+    if (!response.ok) {
+      throw new Error("Kunde inte spara beställningen");
+    }
+
+    await Promise.all(
+      order.items.map((item) =>
+        moduleMaker.Inventory.createMovement(
+          item.id,
+          "OUT",
+          item.quantity,
+        ),
+      ),
+    );
+    
     navigate("/");
   }
 
