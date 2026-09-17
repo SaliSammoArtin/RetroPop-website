@@ -63,7 +63,7 @@ export default function Cart() {
           {cartItems.length > 0 && (
             <div className="fixed bottom-4 right-4 sm:right-6 z-50 bg-retro-green-text text-retro-cream-bg rounded-xl border-3 border-retro-yellow-highlight p-3 sm:p-4 flex flex-col items-end shadow-2xl">
               {discountResult && (
-                <p className="text-sm font-medium">
+                <p className="text-sm font-medium text-retro-cream-bg">
                   Discount: -{discountResult.discountAmount.toFixed(2)}{" "}
                   {currency}
                 </p>
