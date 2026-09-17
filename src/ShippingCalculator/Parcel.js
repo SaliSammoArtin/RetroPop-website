@@ -19,6 +19,4 @@ export default class Parcel {
       return totalVolume + item.width * item.height * item.length * item.quantity;
     }, 0);
   }
-
-
 }

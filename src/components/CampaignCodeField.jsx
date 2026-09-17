@@ -1,18 +1,21 @@
-import { useEffect, useState } from "react";
-import { useCart } from "../context/CartContext";
-import Modules from "../modules/moduleMaker.js";
+import { useEffect, useState } from 'react';
+import { useCart } from '../context/CartContext';
+import Modules from '../modules/moduleMaker.js';
+import { useCurrency } from '../context/CurrencyContext.jsx';
 
-// Tar emot onDiscountApplied som prop, en funktion FÖRÄLDERN (Cart.jsx)
-// skickar in, så den kan få veta om resultatet, inte bara denna komponent.
-export default function CampaignCodeField({ onDiscountApplied }) {
-  // Hämtar den RIKTIGA varukorgen, delad via CartContext
-  const { cartItems } = useCart();
+
+// Hämtar den RIKTIGA varukorgen och den DELADE rabatt-statusen via
+// CartContext. Eftersom discountResult kommer från Context istället
+// för lokal state, ser BÅDE sidopanelen och checkout-sidan samma
+// resultat automatiskt.
+export default function CampaignCodeField( {total} ) {
+
+ 
+  const { cartItems, discountResult, setDiscountResult } = useCart();
+  const { currency } = useCurrency();
 
   // Håller koll på vad kunden skriver i fältet
   const [campaignCode, setCampaignCode] = useState("");
-
-  // Håller resultatet EFTER att modulen räknat ut rabatten
-  const [discountResult, setDiscountResult] = useState(null);
 
   // Körs automatiskt VARJE gång cartItems ändras (produkt läggs till/tas bort).
   // Nollställer rabatten och fältet, kunden måste skriva in koden på nytt
@@ -34,8 +37,12 @@ export default function CampaignCodeField({ onDiscountApplied }) {
       cart: cartItems,
     });
     setDiscountResult(result);
-    onDiscountApplied(result);
   }
+
+  const discountFraction = discountResult
+  ? discountResult.discountAmount / discountResult.totalPrice
+  : 0;
+  const displayedDiscount = total ? total * discountFraction : 0;
 
   return (
     <div className="bg-retro-cream-bg border-2 border-retro-yellow-highlight rounded-xl shadow-lg p-6 flex flex-col gap-3">
@@ -66,7 +73,7 @@ export default function CampaignCodeField({ onDiscountApplied }) {
       </div>
       {discountResult && (
         <p className="font-black tracking-wide text-retro-green-text">
-          Rabatt: {discountResult.discountAmount} kr
+          Rabatt: {displayedDiscount.toFixed(2)} {currency} kr
         </p>
       )}
     </div>
