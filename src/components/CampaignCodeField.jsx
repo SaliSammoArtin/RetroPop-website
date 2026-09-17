@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useCart } from '../context/CartContext';
 import Modules from '../modules/moduleMaker.js';
+import { useCurrency } from '../context/CurrencyContext.jsx';
 
-// Tar emot onDiscountApplied som prop, en funktion FÖRÄLDERN (Cart.jsx)
-// skickar in, så den kan få veta om resultatet, inte bara denna komponent.
-export default function CampaignCodeField({ onDiscountApplied }) {
 
-  // Hämtar den RIKTIGA varukorgen, delad via CartContext
-  const { cartItems } = useCart();
+// Hämtar den RIKTIGA varukorgen och den DELADE rabatt-statusen via
+// CartContext. Eftersom discountResult kommer från Context istället
+// för lokal state, ser BÅDE sidopanelen och checkout-sidan samma
+// resultat automatiskt.
+export default function CampaignCodeField( {total} ) {
+
+ 
+  const { cartItems, discountResult, setDiscountResult } = useCart();
+  const { currency } = useCurrency();
 
   // Håller koll på vad kunden skriver i fältet
   const [campaignCode, setCampaignCode] = useState('');
-
-  // Håller resultatet EFTER att modulen räknat ut rabatten
-  const [discountResult, setDiscountResult] = useState(null);
 
   // Körs automatiskt VARJE gång cartItems ändras (produkt läggs till/tas bort).
   // Nollställer rabatten och fältet, kunden måste skriva in koden på nytt
@@ -22,7 +24,6 @@ export default function CampaignCodeField({ onDiscountApplied }) {
     if (cartItems.length === 0) {
       setDiscountResult(null);
       setCampaignCode('');
-      onDiscountApplied(null)
     } else if (campaignCode) {
       applyCampaignCode();
       }    
@@ -36,8 +37,12 @@ export default function CampaignCodeField({ onDiscountApplied }) {
       cart: cartItems,
     });
     setDiscountResult(result);
-    onDiscountApplied(result);
   }
+
+  const discountFraction = discountResult
+  ? discountResult.discountAmount / discountResult.totalPrice
+  : 0;
+  const displayedDiscount = total ? total * discountFraction : 0;
 
   return (
   <div className="flex flex-col gap-2">
@@ -54,12 +59,12 @@ export default function CampaignCodeField({ onDiscountApplied }) {
         Använd kod
       </button>
       <button
-        onClick={() => { setDiscountResult(null); setCampaignCode(''); onDiscountApplied(null); }}
+        onClick={() => { setDiscountResult(null); setCampaignCode(''); }}
         className="hover:text-red-400 border border-white/10 rounded px-4 py-2 transition-colors">
         Ta bort kod
       </button>
     </div>
-    {discountResult && <p className="text-green-400">Rabatt: {discountResult.discountAmount} kr</p>}
+    {discountResult && <p className="text-green-400">Rabatt: {displayedDiscount.toFixed(2)} {currency}</p>}
   </div>
 );
 }
