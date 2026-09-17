@@ -1,5 +1,6 @@
 import PercentageDiscount from "./services/PercentageDiscount";
-
+import ThresholdDiscount from "./services/ThresholdDiscount";
+import BuyXForYDiscount from "./services/BuyXForYDiscount";
 
 export default class CampaignModule {
   // Statisk beskrivning av modulen, läsbar utan att skapa ett objekt.
@@ -92,10 +93,9 @@ export default class CampaignModule {
     // Kör den specifika uträkningen för vald kampanjtyp -> rabatt i kronor
     const discountAmount = discount.calculate(cart);
 
-    // Räknar ordinarie totalpris för hela varukorgen (samma reduce-mönster
-    // som i Discount-klasserna: bygger ihop en summa, produkt för produkt)
+    
     const totalPrice = cart.reduce((accumulator, item) => {
-      return accumulator + item.price;
+      return accumulator + item.price * item.quantity;
     }, 0);
     
     // Vad kunden faktiskt ska betala: totalpris minus rabatt

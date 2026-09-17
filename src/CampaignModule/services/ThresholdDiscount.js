@@ -9,7 +9,7 @@ export default class ThresholdDiscount extends Discount {
 
   calculate(cart) {
     const totalPrice = cart.reduce((accumulator, item) => {
-      return accumulator + item.price;
+      return accumulator + item.price * item.quantity;
     }, 0);
 
     if (totalPrice >= this.threshold) {
