@@ -367,6 +367,5 @@
     "percentage": 10,
     "threshold": 500
   }
-],
-  "$schema": "./node_modules/json-server/schema.json"
+]
 }
