@@ -70,7 +70,7 @@ export default function Cart() {
       ),
     );
 
-    navigate("/");
+    navigate("/orderConfirm");
   }
 
   return (
