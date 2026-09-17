@@ -4,6 +4,7 @@ import ProductDescription from "./pages/Productdescription.jsx"
 import Products from "./pages/Products.jsx";
 import Home from "./pages/Home.jsx";
 import Cart from "./pages/Cart.jsx";
+import { InventoryPage } from "./inventory/index.js";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,10 @@ const router = createBrowserRouter([
         path: "/cart",
         element: <Cart />
       },
-      
+      {
+        path: "/inventory",
+        element: <InventoryPage />
+      },
     ],
   },
 ]);

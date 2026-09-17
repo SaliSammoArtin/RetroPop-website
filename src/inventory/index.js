@@ -1,4 +1,5 @@
 import InventoryService from "./services/inventoryService.js";
+export { default as InventoryPage } from "./components/InventoryPage.jsx";
 
 export default class Inventory extends InventoryService {
   static descriptor = {

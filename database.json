@@ -155,56 +155,8 @@
       "rate": 0.134
     }
   ],
-  "orders": [
-    {
-      "id": "488a",
-      "name": "salitest",
-      "email": "salitest@cjipsfkld.se",
-      "items": [
-        {
-          "id": "1",
-          "name": "CD",
-          "price": 299,
-          "stock": 6000,
-          "taxCategory": "STANDARD",
-          "width": 15,
-          "height": 15,
-          "length": 1,
-          "weight": 0.1,
-          "quantity": 1
-        },
-        {
-          "id": "2",
-          "name": "VHS",
-          "price": 249,
-          "stock": 70,
-          "taxCategory": "STANDARD",
-          "width": 3,
-          "height": 15,
-          "length": 25,
-          "weight": 0.3,
-          "quantity": 1
-        }
-      ],
-      "total": 548
-    }
-  ],
-  "stockMovements": [
-    {
-      "id": "63f2",
-      "productId": "1",
-      "type": "OUT",
-      "quantity": 1,
-      "timestamp": "2026-09-17T10:35:47.415Z"
-    },
-    {
-      "id": "ee03",
-      "productId": "2",
-      "type": "OUT",
-      "quantity": 1,
-      "timestamp": "2026-09-17T10:35:47.416Z"
-    }
-  ],
+  "orders": [],
+  "stockMovements": [],
   "carriers": [
     {
       "id": "1",

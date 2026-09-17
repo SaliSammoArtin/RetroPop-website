@@ -10,9 +10,9 @@ function InventoryPage() {
   const [error, setError] = useState("");
 
   async function getProducts() {
-  // Sparar svar från API (2) // Skickar förfrågan om info om produkter (1)
+    // Sparar svar från API (2) // Skickar förfrågan om info om produkter (1)
     const response = await fetch("http://localhost:3000/products");
-  // Sparar lista (4)  // Läser innehållet i svaret (3)
+    // Sparar lista (4)  // Läser innehållet i svaret (3)
     const result = await response.json();
 
     if (response.ok) {
@@ -76,33 +76,55 @@ function InventoryPage() {
   // Om true
   if (loading) {
     return <p>Hämtar lagerinformation...</p>;
-  } 
+  }
   // Om false
   if (error) {
     return <p>{error}</p>;
   }
   // Skapar rapport (2) & skickar 2 listor till .buildReport (1)
-  const inventoryReport = InventoryService.buildReport(
+  const inventoryService = new InventoryService();
+  const inventoryReport = inventoryService.buildReport(
     products, movements
   );
   // Visar rapporten på hemsidan (3)
   return (
-    <section>
-      <h1>Inventory</h1>
-      {/* Går igenom rapporten en produkt i taget */}
-      {inventoryReport.map((product) => (
-        // En div skapas för varje product
-        <div key={product.id}>
-          <p className="name">{product.name}</p>
-          <p className="stock">{product.balance}</p>
-          <p> {/* Om true, low stock annars in stock*/}
-            {product.lowStock ? "Low stock" : "In stock"}
-          </p>
-        </div>
-      ))}
+    <section className="max-w-4xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-6">Inventory</h1>
 
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* Går igenom rapporten en produkt i taget */}
+        {inventoryReport.map((product) => (
+          // En div skapas för varje product
+          <div
+            key={product.id}
+            className="border rounded-lg p-4 shadow-sm"
+          >
+            <p className="font-bold text-lg">{product.name}</p>
+            <p>Saldo: {product.balance}</p>
+
+            <p
+              className={
+                product.balance === 0
+                  ? "inline-block rounded px-2 py-1 font-bold text-[#4A433C] bg-[#D8D0C5]"
+                  : product.lowStock
+                    ? "inline-block rounded px-2 py-1 font-bold text-[#7D3021] bg-[#E8C1A8]"
+                    : "inline-block rounded px-2 py-1 font-bold text-[#46512F] bg-[#CED3B4]"
+              }
+            >
+
+              {/* Om true, low stock annars in stock*/}
+              {product.balance === 0
+                ? "Out of stock"
+                : product.lowStock
+                  ? "Low stock"
+                  : "In stock"}
+            </p>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
+
 // Exporterar kompnenten
 export default InventoryPage;
