@@ -69,16 +69,24 @@
     {
       "id": "7",
       "name": "JavaScript for dummies",
-      "price": 1261.5,
+      "price": 1261.32,
       "stock": 25,
-      "taxCategory": "BOCKER"
+      "taxCategory": "BOCKER",
+      "width": 19,
+      "height": 24,
+      "length": 3,
+      "weight": 0.6
     },
     {
       "id": "8",
       "name": "Jolt-cola",
       "price": 14.99,
       "stock": 18,
-      "taxCategory": "LIVSMEDEL"
+      "taxCategory": "LIVSMEDEL",
+      "width": 7,
+      "height": 15,
+      "length": 7,
+      "weight": 0.4
     }
   ],
   "rates": [
