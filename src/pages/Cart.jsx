@@ -6,6 +6,7 @@ import CartItems from "../components/CheckoutItems";
 import CustomerInfoForm from "../components/CustomerInfoForm";
 import CampaignCodeField from "../components/CampaignCodeField";
 import { useNavigate } from "react-router";
+import ShippingQuotes from "../components/ShippingQuotes.jsx";
 
 export default function Cart() {
   const { currency } = useCurrency();
@@ -42,10 +43,13 @@ export default function Cart() {
       <CampaignCodeField onDiscountApplied={setDiscountResult} />
       <h2>Total: {loading ? "..." : `${finalTotal.toFixed(2)} ${currency}`}</h2>
       
+      <ShippingQuotes />
+
       <CustomerInfoForm
         onSubmit={handleOrderSubmit}
         sendButtonLabel="Confirm purchase!"
       />
+
     </div>
   );
 }
