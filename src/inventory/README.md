@@ -1,18 +1,26 @@
-# InventoryModule
-
-## Purpose
-Calculates current stock balance based on stock movements and gives a warning when the balance reaches the reorder point.
+# Inventory Module
 
 ## User Story
-As an admin, i want to see stock balance and get a warning when stock levels are low.
+As an admin, I want to see the current stock balance and receive a warning when stock levels are low.
 
 ## Classes
-- `StockItem` – represents an inventory item (id, name, reorder point)
-- `StockMovement` – represents a stock event (product id, type, quantity, timestamp)
-- `InventoryPage` – displays products, stock levels and low-stock warnings
-- `InventoryService` – calculates stock balance and builds the inventory report
+- `StockItem` – represents an inventory item (id, name, stock, reorder point)
+- `StockMovement` – represents a stock movement (product id, type, quantity, timestamp)
+- `InventoryPage` – fetches and displays products, current balances and low-stock warnings
+- `InventoryService` – calculates balances, builds the inventory report and saves new stock movements
 
 ## API
+
+### Products
 - Endpoint: `/products`
-- Method: GET 
-- Purpose: retrieves the current products and their stock levels
+- Method: `GET`
+- Purpose: retrieves products and their starting stock levels
+
+### Stock movements
+- Endpoint: `/stockMovements`
+- Method: `GET`
+- Purpose: retrieves existing `IN` and `OUT` stock movements
+
+- Endpoint: `/stockMovements`
+- Method: `POST`
+- Purpose: saves a new stock movement
