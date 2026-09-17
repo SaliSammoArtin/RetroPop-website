@@ -14,21 +14,37 @@ export default function CartItems({ items }) {
   return (
     <div className="bg-retro-cream-bg text-retro-green-text border-2 border-retro-yellow-highlight rounded-xl shadow-lg max-w-2xl flex flex-col sm:flex-row sm:justify-between p-4 sm:p-8 m-4 font-black tracking-wide">
       <div className=" flex-1 ">
-        <p className="text-2xl">{items.name}</p>
-        <p>Quantity: {items.quantity}</p>
+        <div className="flex items-center justify-between gap-3 mb-2">
+          <p className="text-2xl">{items.name}</p>
+          <span className="shrink-0 text-sm font-bold bg-retro-yellow-highlight text-retro-green-text rounded-full px-3 py-1">
+            x{items.quantity}
+          </span>
+        </div>
         {loading ?
-          <p>Price: ...</p>
-        : <>
-            <p>Price (excl. tax): {originalMoney.format()}</p>
-            <p>
-              Tax ({(taxRate * 100).toFixed(0)}%):{" "}
-              {Modules.TaxAndCurrencyCalc.createMoney(
-                taxAmount,
-                currency,
-              ).format()}
-            </p>
-            <p>Subtotal (incl. tax): {subtotalMoney.format()}</p>
-          </>
+          <p className="text-sm">Price: ...</p>
+        : <div className="text-sm space-y-1 border-t border-retro-green-text/20 pt-2">
+            <div className="flex justify-between gap-4">
+              <span className="text-retro-green-text/70 font-normal">
+                Price (excl. tax)
+              </span>
+              <span className="tabular-nums">{originalMoney.format()}</span>
+            </div>
+            <div className="flex justify-between gap-4">
+              <span className="text-retro-green-text/70 font-normal">
+                Tax ({(taxRate * 100).toFixed(0)}%)
+              </span>
+              <span className="tabular-nums">
+                {Modules.TaxAndCurrencyCalc.createMoney(
+                  taxAmount,
+                  currency,
+                ).format()}
+              </span>
+            </div>
+            <div className="flex justify-between gap-4 border-t border-retro-green-text/20 pt-1 text-base">
+              <span>Subtotal (incl. tax)</span>
+              <span className="tabular-nums">{subtotalMoney.format()}</span>
+            </div>
+          </div>
         }
       </div>
       <div className="flex items-center p-2 sm:p-8 gap-4">

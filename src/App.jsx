@@ -2,6 +2,7 @@ import { Outlet } from "react-router";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import CartView from "./components/CartView";
+import CartToast from "./components/CartToast";
 import { CurrencyProvider } from "./context/CurrencyContext";
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
           <Outlet />
         </div>
         <CartView />
+        <CartToast />
         {}
         <Footer />
       </div>
