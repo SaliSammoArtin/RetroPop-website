@@ -1,24 +1,14 @@
-// tex import UserHandlerModule from './UserHandler/UserHandlerModule';
+import ShippingService from "../ShippingCalculator/ShippingService";
+import TaxAndCurrencyCalc from "../CurrencyTaxModule";
+import Inventory from "../inventory/index.js";
 
 export default {
   Shipping: new ShippingService(),
   ShippingDescriptor: ShippingService.descriptor,
-  CampaignModule: new CampaignModule(),
-  CampaignModuleDescriptor: CampaignModule.descriptor,
+  //CampaignModule: new CampaignModule(),
+  //CampaignModuleDescriptor: CampaignModule.descriptor,
   Inventory: new Inventory(),
   InventoryDescriptor: Inventory.descriptor,
-  // UserHandler: new UserHandlerModule(),
-  // UserHandlerDescriptor: UserHandlerModule.descriptor,
-
-  /* more modules and descriptors can be added here */
+  TaxAndCurrencyCalc: new TaxAndCurrencyCalc(),
+  TaxAndCurrencyCalcDescriptor: TaxAndCurrencyCalc.descriptor,
 };
-<<<<<<< HEAD
-
-
-//import ShippingModule from "./ShippingCalculator";
-
-//export default {
-// ...ShippingModule
-//}
-=======
->>>>>>> c7f8298871a416f489b831f3462549369521a30f
