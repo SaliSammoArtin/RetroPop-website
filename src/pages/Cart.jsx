@@ -38,21 +38,43 @@ export default function Cart() {
 
     await Promise.all(
       order.items.map((item) =>
-        moduleMaker.Inventory.createMovement(
-          item.id,
-          "OUT",
-          item.quantity,
-        ),
+        moduleMaker.Inventory.createMovement(item.id, "OUT", item.quantity),
       ),
     );
-    
+
     navigate("/");
   }
 
   return (
-    <div>
-      <h1>Cart</h1>
+    <div className="max-w-6xl mx-auto p-6">
+      <h1 className="text-3xl sm:text-4xl font-black tracking-wide text-retro-green-text ">
+        Cart
+      </h1>
 
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="lg:col-span-6 flex flex-col gap-4 ">
+          {cartItems.length === 0 ?
+            <p className="bg-retro-cream-bg text-retro-green-text border-2 border-retro-yellow-highlight rounded-xl shadow-lg p-8 font-black tracking-wide text-center">
+              Your cart is empty.
+            </p>
+          : cartItems.map((item) => <CartItems key={item.id} items={item} />)}
+
+          {cartItems.length > 0 && (
+            <div className="fixed bottom-4 right-4 sm:right-6 z-50 bg-retro-green-text text-retro-cream-bg rounded-xl border-3 border-retro-yellow-highlight p-3 sm:p-4 flex flex-col items-end shadow-2xl">
+              {discountResult && (
+                <p className="text-sm font-medium text-retro-cream-bg">
+                  Discount: -{discountResult.discountAmount.toFixed(2)}{" "}
+                  {currency}
+                </p>
+              )}
+              <p className="text-2xl font-black tracking-wide text-retro-orange-bg">
+                {loading ? "..." : `${finalTotal.toFixed(2)} ${currency}`}
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className="lg:col-span-5 flex flex-col gap-6  rounded-2xl">
       {cartItems.map((item) => (
         <CartItems key={item.id} items={item} />
       ))}
@@ -61,11 +83,14 @@ export default function Cart() {
       
       <ShippingQuotes />
 
-      <CustomerInfoForm
-        onSubmit={handleOrderSubmit}
-        sendButtonLabel="Confirm purchase!"
-      />
+          <CampaignCodeField onDiscountApplied={setDiscountResult} />
 
+          <CustomerInfoForm
+            onSubmit={handleOrderSubmit}
+            sendButtonLabel="Confirm purchase!"
+          />
+        </div>
+      </div>
     </div>
   );
 }

@@ -15,7 +15,7 @@ export default function CampaignCodeField( {total} ) {
   const { currency } = useCurrency();
 
   // Håller koll på vad kunden skriver i fältet
-  const [campaignCode, setCampaignCode] = useState('');
+  const [campaignCode, setCampaignCode] = useState("");
 
   // Körs automatiskt VARJE gång cartItems ändras (produkt läggs till/tas bort).
   // Nollställer rabatten och fältet, kunden måste skriva in koden på nytt
@@ -23,14 +23,14 @@ export default function CampaignCodeField( {total} ) {
   useEffect(() => {
     if (cartItems.length === 0) {
       setDiscountResult(null);
-      setCampaignCode('');
+      setCampaignCode("");
+      onDiscountApplied(null);
     } else if (campaignCode) {
       applyCampaignCode();
-      }    
-    }, [cartItems]);
+    }
+  }, [cartItems]);
 
   async function applyCampaignCode() {
-
     // Anropar modulen (via moduleMaker) med koden och den riktiga varukorgen
     const result = await Modules.CampaignModule.run({
       campaignCode: campaignCode,
@@ -45,26 +45,37 @@ export default function CampaignCodeField( {total} ) {
   const displayedDiscount = total ? total * discountFraction : 0;
 
   return (
-  <div className="flex flex-col gap-2">
-    <input
-      value={campaignCode}
-      onChange={(e) => setCampaignCode(e.target.value)}
-      placeholder="Kampanjkod"
-      className="bg-slate-800/40 border border-white/10 rounded px-3 py-2 text-white placeholder-white/40 w-64"
-    />
-    <div className="flex gap-2">
-      <button
-        onClick={applyCampaignCode}
-        className="bg-white/10 hover:bg-white/20 border border-white/10 rounded px-4 py-2 transition-colors">
-        Använd kod
-      </button>
-      <button
-        onClick={() => { setDiscountResult(null); setCampaignCode(''); }}
-        className="hover:text-red-400 border border-white/10 rounded px-4 py-2 transition-colors">
-        Ta bort kod
-      </button>
+    <div className="bg-retro-cream-bg border-2 border-retro-yellow-highlight rounded-xl shadow-lg p-6 flex flex-col gap-3">
+      <h2 className="text-xl font-black tracking-wide text-retro-green-text">
+        Campaign code
+      </h2>
+      <input
+        value={campaignCode}
+        onChange={(e) => setCampaignCode(e.target.value)}
+        placeholder="Kampanjkod"
+        className="bg-retro-cream-bg border-4 border-retro-green-text rounded px-3 py-2 placeholder-retro-dark-text/60 w-full sm:w-64"
+      />
+      <div className="flex gap-2">
+        <button
+          onClick={applyCampaignCode}
+          className="bg-retro-yellow-highlight hover:bg-retro-orange-bg border-4 border-retro-green-text rounded px-4 py-2 font-black tracking-wide transition-colors">
+          Använd kod
+        </button>
+        <button
+          onClick={() => {
+            setDiscountResult(null);
+            setCampaignCode("");
+            onDiscountApplied(null);
+          }}
+          className="border-4 bg-retro-green-text text-retro-cream-bg border-retro-dark-text hover:bg-red-600 rounded px-4 py-2 font-black tracking-wide transition-colors">
+          Ta bort kod
+        </button>
+      </div>
+      {discountResult && (
+        <p className="font-black tracking-wide text-retro-green-text">
+          Rabatt: {displayedDiscount.toFixed(2)} {currency} kr
+        </p>
+      )}
     </div>
-    {discountResult && <p className="text-green-400">Rabatt: {displayedDiscount.toFixed(2)} {currency}</p>}
-  </div>
-);
+  );
 }

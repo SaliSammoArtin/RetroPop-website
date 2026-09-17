@@ -9,7 +9,7 @@ export default function CartItems({ items }) {
     currency,
   );
   return (
-    <div className=" bg-slate-400/40 border border-white/10 flex justify-between p-8 m-4">
+    <div className="bg-retro-cream-bg text-retro-green-text border-2 border-retro-yellow-highlight rounded-xl shadow-lg max-w-2xl flex flex-col sm:flex-row sm:justify-between p-4 sm:p-8 m-4 font-black tracking-wide">
       <div className=" flex-1 ">
         <p className="text-2xl">{items.name}</p>
         <p>Quantity: {items.quantity}</p>
@@ -29,10 +29,11 @@ export default function CartItems({ items }) {
           </>
         }
       </div>
-      <div className="flex items-center p-8 gap-4">
+      <div className="flex items-center p-2 sm:p-8 gap-4">
         <button
-          className="hover:scale-125 hover:text-white/40 hover:cursor-pointer transition-colors p-1 text-2xl"
-          onClick={() => addToCart(items)}>
+          className="hover:scale-125 hover:text-retro-yellow-highlight hover:cursor-pointer transition-colors p-1 text-2xl"
+          onClick={() => addToCart(items)}
+          aria-label="Increase quantity">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -48,8 +49,9 @@ export default function CartItems({ items }) {
           </svg>
         </button>
         <button
-          className=" hover:scale-125 hover:text-white/40 hover:cursor-pointer transition-colors p-1 text-2xl "
-          onClick={() => removeFromCart(items.id)}>
+          className=" hover:scale-125 hover:text-retro-yellow-highlight hover:cursor-pointer transition-colors p-1 text-2xl "
+          onClick={() => removeFromCart(items.id)}
+          aria-label="Decrease quantity">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -65,8 +67,9 @@ export default function CartItems({ items }) {
           </svg>
         </button>
         <button
-          className="hover:animate-spin hover:scale-125 hover:text-red-500 hover:cursor-pointer transition-colors p-1"
-          onClick={() => deleteFromCart(items.id)}>
+          className="hover:scale-125 hover:text-red-500 hover:cursor-pointer transition-colors p-1"
+          onClick={() => deleteFromCart(items.id)}
+          aria-label="Remove item from cart">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
