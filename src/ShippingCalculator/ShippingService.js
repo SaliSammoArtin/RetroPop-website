@@ -38,7 +38,7 @@ export default class ShippingService {
       return {
         carrier: carrier.name,
         destination,
-        price: carrier.calculatePrice(parcel)
+        price: carrier.calculatePrice(parcel, destination)
       }
     });
 

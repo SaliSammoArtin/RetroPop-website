@@ -11,13 +11,19 @@ import ShippingQuotes from "../components/ShippingQuotes.jsx";
 
 export default function Cart() {
   const { currency } = useCurrency();
-  const { cartItems, discountResult } = useContext(CartContext);
+  const { cartItems, discountResult, shippingQuote } = useContext(CartContext);
   const { total, totalOriginal, totalTax, loading } = useCartTotal(
     cartItems,
     currency,
   );
-  const discountFraction = discountResult ? discountResult.discountAmount / discountResult.totalPrice : 0;
-  const finalTotal = total - (total * discountFraction);
+  const discountFraction =
+    discountResult ?
+      discountResult.discountAmount / discountResult.totalPrice
+    : 0;
+
+  const discountedTotal = total - total * discountFraction;
+  const shippingCost = shippingQuote?.price || 0;
+  const finalTotal = discountedTotal + shippingCost;
 
   const navigate = useNavigate();
 
@@ -27,6 +33,7 @@ export default function Cart() {
       email: customerData.email,
       items: cartItems,
       total: finalTotal,
+      shipping: shippingQuote,
     };
 
     const response = await fetch("/api/orders", {
@@ -80,8 +87,19 @@ export default function Cart() {
               )}
               {discountResult && (
                 <p className="text-sm font-medium text-retro-cream-bg">
-                  Discount: -{(total * discountFraction).toFixed(2)}{" "}
-                  {currency}
+                  Discount: -{(total * discountFraction).toFixed(2)} {currency}
+                </p>
+              )}
+
+              {shippingQuote && (
+                <p className="text-sm font-medium text-retro-cream-bg">
+                  Shipping: {shippingQuote.price.toFixed(2)} {currency}
+                </p>
+              )}
+
+              {shippingQuote && (
+                <p className="text-sm font-medium text-retro-cream-bg">
+                  Shipping: {shippingQuote.price.toFixed(2)} {currency}
                 </p>
               )}
               <p className="text-2xl font-black tracking-wide text-retro-orange-bg">
@@ -92,9 +110,9 @@ export default function Cart() {
         </div>
 
         <div className="lg:col-span-5 flex flex-col gap-6  rounded-2xl">
-      <CampaignCodeField total={total} />
-      
-      <ShippingQuotes />
+          <CampaignCodeField total={total} />
+
+          <ShippingQuotes />
 
           <CustomerInfoForm
             onSubmit={handleOrderSubmit}

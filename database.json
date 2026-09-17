@@ -181,35 +181,35 @@
     }
   ],
   "campaigns": [
-  {
-    "id": "1",
-    "code": "RETRO20",
-    "campaignCode": "RETRO20",
-    "name": "20% rabatt",
-    "description": "20% rabatt på hela beställningen",
-    "type": "percentage",
-    "percentage": 20
-  },
-  {
-    "id": "2",
-    "code": "3FOR2",
-    "campaignCode": "3FOR2",
-    "name": "3 för 2 på CD",
-    "description": "Köp 3 CD-skivor, betala bara för 2",
-    "type": "buyXForY",
-    "x": 3,
-    "y": 2,
-    "productId": "1"
-  },
-  {
-    "id": "3",
-    "code": "HANDLA500",
-    "campaignCode": "HANDLA500",
-    "name": "Handla för 500, spara 10%",
-    "description": "10% rabatt när du handlar för minst 500 kr",
-    "type": "threshold",
-    "percentage": 10,
-    "threshold": 500
-  }
-]
+    {
+      "id": "1",
+      "code": "RETRO20",
+      "campaignCode": "RETRO20",
+      "name": "20% rabatt",
+      "description": "20% rabatt på hela beställningen",
+      "type": "percentage",
+      "percentage": 20
+    },
+    {
+      "id": "2",
+      "code": "3FOR2",
+      "campaignCode": "3FOR2",
+      "name": "3 för 2 på CD",
+      "description": "Köp 3 CD-skivor, betala bara för 2",
+      "type": "buyXForY",
+      "x": 3,
+      "y": 2,
+      "productId": "1"
+    },
+    {
+      "id": "3",
+      "code": "HANDLA500",
+      "campaignCode": "HANDLA500",
+      "name": "Handla för 500, spara 10%",
+      "description": "10% rabatt när du handlar för minst 500 kr",
+      "type": "threshold",
+      "percentage": 10,
+      "threshold": 500
+    }
+  ]
 }

@@ -9,10 +9,21 @@ export default class Carrier {
     this.pricePerKg = carrierData.pricePerKg;
   }
 
-  calculatePrice(parcel) {
+  calculatePrice(parcel, destination) {
     const weight = parcel.getTotalWeight();
-    return this.basePrice + (this.pricePerKg * weight);
 
+    const weightPrice = weight * this.pricePerKg;
+    const zoneFee = this.getZoneFee(destination);
+
+    return this.basePrice + weightPrice + zoneFee;
+  }
+
+  getZoneFee(destination) {
+    const firstDigit = Number(destination[0]);
+
+    if (firstDigit === 2) return 0;
+    if (firstDigit >= 3 && firstDigit <= 7) return 25;
+    return 50;
   }
 
 }

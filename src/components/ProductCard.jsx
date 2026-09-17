@@ -18,12 +18,17 @@ export default function ProductCard({ product }) {
         {loading ? "..." : `${finalPrice.toFixed(2)} ${currency}`}
       </p>
 
-      <p className="text-sm italic opacity-70">Only {product.stock} left!</p>
+      <p className="text-sm italic opacity-70">Only {product.balance} left!</p>
 
       <button
         onClick={() => addToCart(product)}
-        className="mt-auto rounded-xl bg-retro-orange-bg text-retro-dark-text font-semibold py-2 hover:bg-retro-yellow-highlight hover:cursor-pointer">
-        Add to cart
+        disabled={product.balance <= 0}
+        className={
+          product.balance <= 0 ?
+            "mt-auto rounded-xl bg-[#625B52] text-[#D8D0C5] font-semibold py-2 cursor-not-allowed opacity-70"
+          : "mt-auto rounded-xl bg-retro-orange-bg text-retro-dark-text font-semibold py-2 hover:bg-retro-yellow-highlight"
+        }>
+        {product.balance <= 0 ? "Out of stock" : "Add to cart"}
       </button>
       <Link
         to={`/products/${product.id}`}
