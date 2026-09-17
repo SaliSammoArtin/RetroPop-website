@@ -63,7 +63,7 @@ export default function Cart() {
             <div className="fixed bottom-4 right-4 sm:right-6 z-50 bg-retro-green-text text-retro-cream-bg rounded-xl border-3 border-retro-yellow-highlight p-3 sm:p-4 flex flex-col items-end shadow-2xl">
               {discountResult && (
                 <p className="text-sm font-medium text-retro-cream-bg">
-                  Discount: -{discountResult.discountAmount.toFixed(2)}{" "}
+                  Discount: -{(total * discountFraction).toFixed(2)}{" "}
                   {currency}
                 </p>
               )}
@@ -75,15 +75,9 @@ export default function Cart() {
         </div>
 
         <div className="lg:col-span-5 flex flex-col gap-6  rounded-2xl">
-      {cartItems.map((item) => (
-        <CartItems key={item.id} items={item} />
-      ))}
       <CampaignCodeField total={total} />
-      <h2>Total: {loading ? "..." : `${finalTotal.toFixed(2)} ${currency}`}</h2>
       
       <ShippingQuotes />
-
-          <CampaignCodeField onDiscountApplied={setDiscountResult} />
 
           <CustomerInfoForm
             onSubmit={handleOrderSubmit}

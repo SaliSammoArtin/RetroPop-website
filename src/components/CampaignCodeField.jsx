@@ -24,7 +24,6 @@ export default function CampaignCodeField( {total} ) {
     if (cartItems.length === 0) {
       setDiscountResult(null);
       setCampaignCode("");
-      onDiscountApplied(null);
     } else if (campaignCode) {
       applyCampaignCode();
     }
@@ -65,7 +64,6 @@ export default function CampaignCodeField( {total} ) {
           onClick={() => {
             setDiscountResult(null);
             setCampaignCode("");
-            onDiscountApplied(null);
           }}
           className="border-4 bg-retro-green-text text-retro-cream-bg border-retro-dark-text hover:bg-red-600 rounded px-4 py-2 font-black tracking-wide transition-colors">
           Ta bort kod
@@ -73,7 +71,7 @@ export default function CampaignCodeField( {total} ) {
       </div>
       {discountResult && (
         <p className="font-black tracking-wide text-retro-green-text">
-          Rabatt: {displayedDiscount.toFixed(2)} {currency} kr
+          Rabatt: {displayedDiscount.toFixed(2)} {currency}
         </p>
       )}
     </div>
