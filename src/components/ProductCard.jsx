@@ -4,7 +4,7 @@ import { useCurrency } from "../context/CurrencyContext";
 import { useCalculatedPrice } from "../hooks/useCalculatedPrice";
 
 export default function ProductCard({ product }) {
-  const { addToCart } = useCart();
+  const { addToCart, showToast } = useCart();
   const { currency } = useCurrency();
   const { finalPrice, loading } = useCalculatedPrice(product, currency);
 
@@ -21,7 +21,10 @@ export default function ProductCard({ product }) {
       <p className="text-sm italic opacity-70">Only {product.balance} left!</p>
 
       <button
-        onClick={() => addToCart(product)}
+        onClick={() => {
+          addToCart(product);
+          showToast(`${product.name} added to cart`);
+        }}
         disabled={product.balance <= 0}
         className={
           product.balance <= 0 ?

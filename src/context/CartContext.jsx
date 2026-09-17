@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useRef } from "react";
 
 export const CartContext = createContext();
 
@@ -8,9 +8,17 @@ export const CartProvider = ({ children }) => {
   const [discountResult, setDiscountResult] = useState(null);
   const [shippingQuote, setShippingQuote] = useState(null); //Frakt användaren valt
   const [postalCode, setPostalCode] = useState(""); //Postnummer från användaren
+  const [toast, setToast] = useState(null);
+  const toastTimeoutRef = useRef(null);
 
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
+
+  const showToast = (message) => {
+    clearTimeout(toastTimeoutRef.current);
+    setToast({ id: Date.now(), message });
+    toastTimeoutRef.current = setTimeout(() => setToast(null), 2500);
+  };
 
   const addToCart = (product) => {
     setCartItems((PrevItems) => {
@@ -62,6 +70,8 @@ export const CartProvider = ({ children }) => {
         setShippingQuote,
         postalCode,
         setPostalCode,
+        toast,
+        showToast,
       }}>
       {children}
     </CartContext.Provider>
