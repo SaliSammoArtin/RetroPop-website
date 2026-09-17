@@ -9,7 +9,7 @@ export default function ProductCard({ product }) {
   const { finalPrice, loading } = useCalculatedPrice(product, currency);
 
   return (
-    <div className=" bg-retro-green-text text-retro-cream-bg border-2 shadow-lg p-6 flex flex-col gap-2 min-h-96 transition hover:scale-105 hover:bg-retro-green-text/80 border-retro-cream-bg">
+    <div className=" bg-retro-green-text text-retro-cream-bg border-4 border-retro-dark-text shadow-lg p-6 flex flex-col gap-2 min-h-96 transition hover:scale-105 hover:bg-retro-green-text/80 ">
       <div className="flex-1 rounded-xl bg-retro-yellow-highlight mb-2 " />
 
       <h3 className="text-xl font-semibold italic">{product.name}</h3>
