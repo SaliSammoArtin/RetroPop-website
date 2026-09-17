@@ -19,8 +19,8 @@ export default function Hero() {
           </h1>
 
           <p className="text-sm sm:text-base text-retro-cream-bg/90 leading-relaxed font-medium max-w-xl">
-            We proudly will take care of your order and send it to you as soon
-            as possible.
+            We will prudly take care of your order and send it to you as soon as
+            possible.
           </p>
 
           <Link
