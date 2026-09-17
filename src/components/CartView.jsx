@@ -5,9 +5,11 @@ import { Link } from "react-router";
 import CheckoutItems from "./CheckoutItems";
 
 export default function ShoppingCart() {
-  const { isCartOpen, closeCart, cartItems } = useCart();
+  const { isCartOpen, closeCart, cartItems, discountResult } = useCart();
   const { currency } = useCurrency();
   const { total, loading: totalLoading } = useCartTotal(cartItems, currency);
+  const discountFraction = (discountResult ? discountResult.discountAmount / discountResult.totalPrice : 0);
+  const finalTotal = total - (total * discountFraction);
 
   if (!isCartOpen) return null;
   return (
@@ -39,8 +41,11 @@ export default function ShoppingCart() {
         : cartItems.map((item) => <CheckoutItems key={item.id} items={item} />)}
       </div>
       <div className="p-4 border-t border-white/10">
+      {discountResult  && (
+         <p className="text-green-400">Rabatt: {(total * discountFraction).toFixed(2)} {currency}</p>
+      )}
         <h2 className="font-semibold">
-          Total: {totalLoading ? "..." : `${total.toFixed(2)} ${currency}`}
+          Total: {totalLoading ? "..." : `${finalTotal.toFixed(2)} ${currency}`}
         </h2>
         <Link to={"/cart"} className="text-2xl hover:text-white/30">
           Checkout

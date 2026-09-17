@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { useCurrency } from "../context/CurrencyContext";
 import { useCartTotal } from "../hooks/useCartTotal";
@@ -11,10 +11,10 @@ import ShippingQuotes from "../components/ShippingQuotes.jsx";
 
 export default function Cart() {
   const { currency } = useCurrency();
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, discountResult } = useContext(CartContext);
   const { total, loading } = useCartTotal(cartItems, currency);
-  const [ discountResult, setDiscountResult] = useState(null);
-  const finalTotal = total - (discountResult ? discountResult.discountAmount : 0);
+  const discountFraction = discountResult ? discountResult.discountAmount / discountResult.totalPrice : 0;
+  const finalTotal = total - (total * discountFraction);
 
   const navigate = useNavigate();
 
@@ -56,7 +56,7 @@ export default function Cart() {
       {cartItems.map((item) => (
         <CartItems key={item.id} items={item} />
       ))}
-      <CampaignCodeField onDiscountApplied={setDiscountResult} />
+      <CampaignCodeField total={total} />
       <h2>Total: {loading ? "..." : `${finalTotal.toFixed(2)} ${currency}`}</h2>
       
       <ShippingQuotes />
