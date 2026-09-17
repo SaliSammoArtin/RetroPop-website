@@ -10,7 +10,7 @@ export default function Products() {
   const [products, setProducts] = useState([]);
 
   async function getProducts() {
-    const response = await fetch("http://localhost:3000/products");
+    const response = await fetch("/api/products");
     const result = await response.json();
 
     if (response.ok) {
