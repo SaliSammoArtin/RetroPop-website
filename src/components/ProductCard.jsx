@@ -22,7 +22,7 @@ export default function ProductCard({ product }) {
 
       <button
         onClick={() => addToCart(product)}
-        className="mt-auto rounded-xl bg-retro-orange-bg text-retro-dark-text font-semibold py-2 hover:bg-retro-yellow-highlight">
+        className="mt-auto rounded-xl bg-retro-orange-bg text-retro-dark-text font-semibold py-2 hover:bg-retro-yellow-highlight hover:cursor-pointer">
         Add to cart
       </button>
       <Link

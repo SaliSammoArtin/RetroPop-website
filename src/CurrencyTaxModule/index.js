@@ -36,6 +36,16 @@ export default class TaxAndCurrencyCalc {
         input: ["firstMoney: Money", "secondMoney: Money"],
         output: "Money (sum, same currency)",
       },
+      {
+        method: "createMoney",
+        input: ["amount: number", "currency: string"],
+        output: "Money",
+      },
+      {
+        method: "scaleMoney",
+        input: ["money: Money", "factor: number"],
+        output: "Money (amount * factor, same currency)",
+      },
     ],
     priceForm: {
       amount: {
@@ -76,6 +86,7 @@ export default class TaxAndCurrencyCalc {
 
     return {
       originalPrice: convertedOriginal.amount,
+      originalMoney: convertedOriginal,
       taxRate: this.#taxTable.getRate(taxCategory),
       taxAmount: finalMoney.amount - convertedOriginal.amount,
       finalPrice: finalMoney.amount,
@@ -98,5 +109,13 @@ export default class TaxAndCurrencyCalc {
 
   addPrices(firstMoney, secondMoney) {
     return firstMoney.add(secondMoney);
+  }
+
+  createMoney(amount, currency) {
+    return new Money(amount, currency);
+  }
+
+  scaleMoney(money, factor) {
+    return new Money(money.amount * factor, money.currency);
   }
 }
