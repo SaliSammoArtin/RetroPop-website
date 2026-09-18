@@ -11,7 +11,15 @@ import ShippingQuotes from "../components/ShippingQuotes.jsx";
 
 export default function Cart() {
   const { currency } = useCurrency();
-  const { cartItems, discountResult, shippingQuote } = useContext(CartContext);
+  const {
+    cartItems,
+    setCartItems,
+    discountResult,
+    setDiscountResult,
+    shippingQuote,
+    setShippingQuote,
+    setPostalCode,
+  } = useContext(CartContext);
   const { total, totalOriginal, totalTax, loading } = useCartTotal(
     cartItems,
     currency,
@@ -69,6 +77,11 @@ export default function Cart() {
         moduleMaker.Inventory.createMovement(item.id, "OUT", item.quantity),
       ),
     );
+
+    setCartItems([]);
+    setDiscountResult(null);
+    setShippingQuote(null);
+    setPostalCode("");
 
     navigate("/orderConfirm");
   }
