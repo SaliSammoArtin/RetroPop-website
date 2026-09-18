@@ -28,14 +28,14 @@ export default function ProductCard({ product }) {
         disabled={product.balance <= 0}
         className={
           product.balance <= 0 ?
-            "mt-auto rounded-xl bg-[#625B52] text-[#D8D0C5] font-semibold py-2 cursor-not-allowed opacity-70"
-          : "mt-auto rounded-xl bg-retro-orange-bg text-retro-dark-text font-semibold py-2 hover:bg-retro-yellow-highlight"
+            "mt-auto rounded-xl bg-retro-dark-text text-retro-cream-bg font-semibold py-2 cursor-not-allowed opacity-70"
+          : "mt-auto rounded-xl bg-retro-orange-bg text-retro-dark-text font-semibold py-2 hover:bg-retro-yellow-highlight hover:cursor-pointer"
         }>
         {product.balance <= 0 ? "Out of stock" : "Add to cart"}
       </button>
       <Link
         to={`/products/${product.id}`}
-        className="mt-auto rounded-xl border border-retro-cream-bg/40 text-retro-cream-bg py-2 hover:border-retro-yellow-highlight hover:text-retro-yellow-highlight justify-center flex">
+        className="mt-auto rounded-xl border border-retro-cream-bg/40 text-retro-cream-bg py-2 hover:border-retro-yellow-highlight hover:text-retro-yellow-highlight hover:cursor-pointer justify-center flex">
         View details!
       </Link>
     </div>
