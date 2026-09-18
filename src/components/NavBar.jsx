@@ -1,28 +1,61 @@
+import { useState } from "react";
 import { Link } from "react-router";
 import { useCart } from "../context/CartContext";
 import CurrencySelector from "./CurrencySelector";
 
 export default function NavBar() {
   const { openCart } = useCart();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const links = [
+    { to: "/", label: "Homepage" },
+    { to: "/products", label: "Products" },
+    { to: "/products", label: "Categories" },
+  ];
+
   return (
     <nav>
-      <div className=" mb-6 flex w-full bg-retro-green-text border-b-4 border-retro-yellow-highlight text-retro-cream-bg font-black tracking-wide">
-        <div className=" m-3 ml-4 p-3 text-xl">
-          <Link to="/" className="p-3 hover:text-retro-yellow-highlight">
-            Homepage
-          </Link>
-          <Link
-            to="/products"
-            className="p-3 hover:text-retro-yellow-highlight">
-            Products
-          </Link>
-          <Link
-            to="/products"
-            className="p-3 hover:text-retro-yellow-highlight">
-            Categories
-          </Link>{" "}
+      <div className="mb-6 flex w-full flex-wrap items-center bg-retro-green-text border-b-4 border-retro-yellow-highlight text-retro-cream-bg font-black tracking-wide">
+        <div className="hidden md:flex m-3 ml-4 p-3 text-xl">
+          {links.map((link) => (
+            <Link
+              key={link.label}
+              to={link.to}
+              className="p-3 hover:text-retro-yellow-highlight">
+              {link.label}
+            </Link>
+          ))}
         </div>
-        <div className="flex items-center gap-8 ml-auto text-xl mr-8">
+
+        <button
+          onClick={() => setIsMenuOpen((open) => !open)}
+          aria-label="Toggle menu"
+          aria-expanded={isMenuOpen}
+          className="md:hidden m-3 ml-4 p-3 hover:text-retro-yellow-highlight">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-6">
+            {isMenuOpen ? (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18 18 6M6 6l12 12"
+              />
+            ) : (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"
+              />
+            )}
+          </svg>
+        </button>
+
+        <div className="flex items-center gap-4 md:gap-8 ml-auto text-xl mr-4 md:mr-8">
           <CurrencySelector />
           <button
             onClick={openCart}
@@ -43,6 +76,20 @@ export default function NavBar() {
             </svg>
           </button>
         </div>
+
+        {isMenuOpen && (
+          <div className="md:hidden flex flex-col w-full px-4 pb-3 text-xl">
+            {links.map((link) => (
+              <Link
+                key={link.label}
+                to={link.to}
+                onClick={() => setIsMenuOpen(false)}
+                className="py-2 hover:text-retro-yellow-highlight">
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </nav>
   );
