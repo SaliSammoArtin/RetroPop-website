@@ -18,7 +18,11 @@ export default function ProductCard({ product }) {
         {loading ? "..." : `${finalPrice.toFixed(2)} ${currency}`}
       </p>
 
-      <p className="text-sm italic opacity-70">Only {product.balance} left!</p>
+      {product.lowStock && product.balance > 0 && (
+        <p className="text-sm italic opacity-70">
+          Only {product.balance} left!
+        </p>
+      )}
 
       <button
         onClick={() => {

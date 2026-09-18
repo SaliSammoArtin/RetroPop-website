@@ -3,11 +3,16 @@ import StockItem from "../models/stockItem.js";
 import StockMovement from "../models/stockMovement.js";
 import InventoryService from "../services/inventoryService.js";
 
+const inventoryService = new InventoryService();
+
 function InventoryPage() {
   const [products, setProducts] = useState([]);
   const [movements, setMovements] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [selectedProductId, setSelectedProductId] = useState("");
+  const [deliveryQuantity, setDeliveryQuantity] = useState(1);
+  const [successMessage, setSuccessMessage] = useState("");
 
   async function getProducts() {
     // Sparar svar från API (2) // Skickar förfrågan om info om produkter (1)
@@ -53,6 +58,28 @@ function InventoryPage() {
       throw new Error("Could not get movements!");
     }
   }
+
+  async function handleDelivery(event) {
+    event.preventDefault();
+    setError("");
+    setSuccessMessage("");
+
+    try {
+      await inventoryService.createMovement(
+        selectedProductId,
+        "IN",
+        Number(deliveryQuantity),
+      );
+
+      await getMovements();
+
+      setSuccessMessage("Inleveransen har registrerats.");
+      setDeliveryQuantity(1);
+    } catch (error) {
+      setError(error.message);
+    }
+  }
+
   // Startar hämtningarna när sidan öppnas
   useEffect(() => {
     // Funktionen väntar in svar från API
@@ -82,7 +109,6 @@ function InventoryPage() {
     return <p>{error}</p>;
   }
   // Skapar rapport (2) & skickar 2 listor till .buildReport (1)
-  const inventoryService = new InventoryService();
   const inventoryReport = inventoryService.buildReport(
     products, movements
   );
@@ -90,6 +116,54 @@ function InventoryPage() {
   return (
     <section className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Inventory</h1>
+
+      <form
+        onSubmit={handleDelivery}
+        className="mb-6 flex flex-wrap items-end gap-3 rounded-lg bg-retro-green-text p-4 text-retro-cream-bg"
+      >
+        <label className="flex flex-col gap-1">
+          <span className="font-bold">Produkt</span>
+
+          <select
+            value={selectedProductId}
+            onChange={(event) => setSelectedProductId(event.target.value)}
+            required
+            className="rounded border p-2"
+          >
+            <option value="">Välj produkt</option>
+
+            {products.map((product) => (
+              <option key={product.id} value={product.id}>
+                {product.name}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="flex flex-col gap-1">
+          <span className="font-bold">Antal</span>
+
+          <input
+            type="number"
+            min="1"
+            value={deliveryQuantity}
+            onChange={(event) => setDeliveryQuantity(event.target.value)}
+            required
+            className="w-24 rounded border p-2"
+          />
+        </label>
+
+        <button
+          type="submit"
+          className="rounded bg-retro-orange-bg px-4 py-2 font-bold text-retro-dark-text"
+        >
+          Registrera inleverans
+        </button>
+      </form>
+
+      {successMessage && (
+        <p className="mb-4 font-bold text-[#46512F]">{successMessage}</p>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Går igenom rapporten en produkt i taget */}
@@ -104,7 +178,7 @@ function InventoryPage() {
 
             <p
               className={
-                product.balance === 0
+                product.balance <= 0
                   ? "inline-block rounded px-2 py-1 font-bold text-[#4A433C] bg-[#D8D0C5]"
                   : product.lowStock
                     ? "inline-block rounded px-2 py-1 font-bold text-[#7D3021] bg-[#E8C1A8]"
@@ -113,7 +187,7 @@ function InventoryPage() {
             >
 
               {/* Om true, low stock annars in stock*/}
-              {product.balance === 0
+              {product.balance <= 0
                 ? "Out of stock"
                 : product.lowStock
                   ? "Low stock"
