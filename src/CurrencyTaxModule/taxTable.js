@@ -1,4 +1,4 @@
-export class UnkwownCategoryError extends Error {
+export class UnknownCategoryError extends Error {
   constructor(taxCategory) {
     super(`Unknown category: ${taxCategory}.`);
     this.name = "UnknownCategoryError";
@@ -15,7 +15,7 @@ export default class TaxTable {
   getRate(taxCategory) {
     const rate = this.#rates[taxCategory];
     if (rate === undefined) {
-      throw new UnkwownCategoryError(taxCategory);
+      throw new UnknownCategoryError(taxCategory);
     }
     return rate;
   }
