@@ -42,7 +42,7 @@ export default function ProductDescription() {
     );
   }
 
-  const stockCount = product.balance;
+  const stockCount = product.stock;
   const isOutOfStock = stockCount <= 0;
 
   return (
