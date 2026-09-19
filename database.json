@@ -163,8 +163,137 @@
       "rate": 0.134
     }
   ],
-  "orders": [],
-  "stockMovements": [],
+  "orders": [
+    {
+      "id": "411e",
+      "name": "Per",
+      "email": "per@mail.com",
+      "items": [
+        {
+          "id": "2",
+          "name": "VHS",
+          "price": 249,
+          "stock": 70,
+          "taxCategory": "STANDARD",
+          "width": 3,
+          "height": 15,
+          "length": 25,
+          "weight": 0.3,
+          "balance": 70,
+          "lowStock": false,
+          "quantity": 1
+        },
+        {
+          "id": "4",
+          "name": "Vinyl",
+          "price": 359,
+          "stock": 40,
+          "taxCategory": "STANDARD",
+          "width": 12,
+          "height": 12,
+          "length": 1,
+          "weight": 0.2,
+          "balance": 40,
+          "lowStock": false,
+          "quantity": 1
+        },
+        {
+          "id": "3",
+          "name": "Kassettband",
+          "price": 499,
+          "stock": 40,
+          "taxCategory": "STANDARD",
+          "width": 3,
+          "height": 15,
+          "length": 1,
+          "weight": 0.1,
+          "balance": 40,
+          "lowStock": false,
+          "quantity": 1
+        }
+      ],
+      "total": 1383.75,
+      "shipping": null
+    },
+    {
+      "id": "39d5",
+      "name": "Gonzo",
+      "email": "gonzo@muppet.com",
+      "items": [
+        {
+          "id": "1",
+          "name": "CD",
+          "price": 299,
+          "stock": 6000,
+          "taxCategory": "STANDARD",
+          "width": 15,
+          "height": 15,
+          "length": 1,
+          "weight": 0.1,
+          "balance": 6000,
+          "lowStock": false,
+          "quantity": 1
+        },
+        {
+          "id": "2",
+          "name": "VHS",
+          "price": 249,
+          "stock": 70,
+          "taxCategory": "STANDARD",
+          "width": 3,
+          "height": 15,
+          "length": 25,
+          "weight": 0.3,
+          "balance": 69,
+          "lowStock": false,
+          "quantity": 1
+        }
+      ],
+      "total": 773,
+      "shipping": {
+        "carrier": "DHL",
+        "destination": "41868",
+        "price": 88
+      }
+    }
+  ],
+  "stockMovements": [
+    {
+      "id": "311b",
+      "productId": "2",
+      "type": "OUT",
+      "quantity": 1,
+      "timestamp": "2026-09-19T16:40:54.804Z"
+    },
+    {
+      "id": "01b4",
+      "productId": "4",
+      "type": "OUT",
+      "quantity": 1,
+      "timestamp": "2026-09-19T16:40:54.805Z"
+    },
+    {
+      "id": "0063",
+      "productId": "3",
+      "type": "OUT",
+      "quantity": 1,
+      "timestamp": "2026-09-19T16:40:54.806Z"
+    },
+    {
+      "id": "77a9",
+      "productId": "1",
+      "type": "OUT",
+      "quantity": 1,
+      "timestamp": "2026-09-19T17:00:26.616Z"
+    },
+    {
+      "id": "d83d",
+      "productId": "2",
+      "type": "OUT",
+      "quantity": 1,
+      "timestamp": "2026-09-19T17:00:26.617Z"
+    }
+  ],
   "carriers": [
     {
       "id": "1",

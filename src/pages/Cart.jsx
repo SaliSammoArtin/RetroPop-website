@@ -9,6 +9,7 @@ import { useNavigate } from "react-router";
 import moduleMaker from "../modules/moduleMaker";
 import ShippingQuotes from "../components/ShippingQuotes.jsx";
 
+
 export default function Cart() {
   const { currency } = useCurrency();
   const {
@@ -20,6 +21,7 @@ export default function Cart() {
     setShippingQuote,
     setPostalCode,
   } = useContext(CartContext);
+
   const { total, totalOriginal, totalTax, loading } = useCartTotal(
     cartItems,
     currency,
@@ -46,14 +48,26 @@ export default function Cart() {
   const discountFraction =
     discountResult ?
       discountResult.discountAmount / discountResult.totalPrice
-    : 0;
+      : 0;
 
   const discountedTotal = total - total * discountFraction;
   const finalTotal = discountedTotal + shippingCost;
 
   const navigate = useNavigate();
 
+  const [shippingError, setShippingError] = useState("");
+
+
   async function handleOrderSubmit(customerData) {
+
+    if (!shippingQuote) {
+      setShippingError("Please select a shipping option before checkout.");
+      return;
+    }
+
+    setShippingError("");
+
+
     const order = {
       name: customerData.name,
       email: customerData.email,
@@ -98,7 +112,7 @@ export default function Cart() {
             <p className="bg-retro-cream-bg text-retro-green-text border-2 border-retro-yellow-highlight rounded-xl shadow-lg p-8 font-black tracking-wide text-center">
               Your cart is empty.
             </p>
-          : cartItems.map((item) => <CartItems key={item.id} items={item} />)}
+            : cartItems.map((item) => <CartItems key={item.id} items={item} />)}
 
           {cartItems.length > 0 && (
             <div className="fixed bottom-4 right-4 sm:right-6 z-50 bg-retro-green-text text-retro-cream-bg rounded-xl border-3 border-retro-yellow-highlight p-3 sm:p-4 flex flex-col items-end shadow-2xl">
@@ -139,6 +153,12 @@ export default function Cart() {
           <CampaignCodeField total={total} />
 
           <ShippingQuotes />
+
+          {shippingError && (
+            <p className="text-red-600 font-bold text-sm">
+              {shippingError}
+            </p>
+          )}
 
           <CustomerInfoForm
             onSubmit={handleOrderSubmit}
