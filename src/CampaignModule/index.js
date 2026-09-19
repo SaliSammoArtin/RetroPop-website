@@ -93,11 +93,10 @@ export default class CampaignModule {
     // Kör den specifika uträkningen för vald kampanjtyp -> rabatt i kronor
     const discountAmount = discount.calculate(cart);
 
-    
     const totalPrice = cart.reduce((accumulator, item) => {
       return accumulator + item.price * item.quantity;
     }, 0);
-    
+
     // Vad kunden faktiskt ska betala: totalpris minus rabatt
     const finalPrice = totalPrice - discountAmount;
 
@@ -105,6 +104,28 @@ export default class CampaignModule {
     return {
       totalPrice: Math.round(totalPrice * 100) / 100,
       discountAmount: Math.round(discountAmount * 100) / 100,
+      finalPrice: Math.round(finalPrice * 100) / 100,
+    };
+  }
+  // skapar funktion för att kombinera rabatter (rabatterna adderas)
+  combineDiscounts(results) {
+    // plockar ut det första resultatet i listan totalPrice
+    const totalPrice = results[0].totalPrice;
+
+    // går igenom varje resultat i listan och summerar till en totalsumma för de rabatter som lagts till
+    const totalDiscount = results.reduce((accumulator, result) => {
+      return accumulator + result.discountAmount;
+    }, 0);
+
+    // räknar ut slutsumman efter alla kombinerade rabatter
+    const finalPrice = totalPrice - totalDiscount;
+
+    // Ger tillbaka samma tre fält som run() - totalPrice, discountAmount,
+    // finalPrice. Så React alltid vet vad den kan hämta ut, oavsett
+    // vilken metod som räknat ut resultatet.
+    return {
+      totalPrice: Math.round(totalPrice * 100) / 100,
+      discountAmount: Math.round(totalDiscount * 100) / 100,
       finalPrice: Math.round(finalPrice * 100) / 100,
     };
   }

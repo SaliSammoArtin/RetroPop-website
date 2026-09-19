@@ -14,8 +14,8 @@ export default function Cart() {
   const {
     cartItems,
     setCartItems,
-    discountResult,
-    setDiscountResult,
+    appliedCodes,
+    setAppliedCodes,
     shippingQuote,
     setShippingQuote,
     setPostalCode,
@@ -43,12 +43,13 @@ export default function Cart() {
   }, [currency]);
 
   const shippingCost = (shippingQuote?.price || 0) * shippingRate;
-  const discountFraction =
-    discountResult ?
-      discountResult.discountAmount / discountResult.totalPrice
-    : 0;
+  const combined =
+  appliedCodes && appliedCodes.length > 0
+  ? moduleMaker.CampaignModule.combineDiscounts(appliedCodes.map((entry) => entry.result))
+  : null;
 
-  const discountedTotal = total - total * discountFraction;
+  const discountFraction = combined ? combined.discountAmount / combined.totalPrice : 0;
+  const discountedTotal = total - total* discountFraction;
   const finalTotal = discountedTotal + shippingCost;
 
   const navigate = useNavigate();
@@ -79,7 +80,7 @@ export default function Cart() {
     );
 
     setCartItems([]);
-    setDiscountResult(null);
+    setAppliedCodes([]);
     setShippingQuote(null);
     setPostalCode("");
 
@@ -116,7 +117,7 @@ export default function Cart() {
                   moms
                 </p>
               )}
-              {discountResult && (
+              {combined && (
                 <p className="text-sm font-medium text-retro-cream-bg">
                   Discount: -{(total * discountFraction).toFixed(2)} {currency}
                 </p>

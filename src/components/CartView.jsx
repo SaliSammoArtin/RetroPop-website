@@ -6,7 +6,7 @@ import CheckoutItems from "./CheckoutItems";
 import Modules from "../modules/moduleMaker.js";
 
 export default function ShoppingCart() {
-  const { isCartOpen, closeCart, cartItems, discountResult } = useCart();
+  const { isCartOpen, closeCart, cartItems, appliedCodes } = useCart();
   const { currency } = useCurrency();
   const {
     total,
@@ -14,10 +14,12 @@ export default function ShoppingCart() {
     totalTax,
     loading: totalLoading,
   } = useCartTotal(cartItems, currency);
-  const discountFraction =
-    discountResult ?
-      discountResult.discountAmount / discountResult.totalPrice
-    : 0;
+  const combined =
+    appliedCodes && appliedCodes.length > 0
+      ? Modules.CampaignModule.combineDiscounts(appliedCodes.map((entry) => entry.result))
+      : null;
+
+  const discountFraction = combined ? combined.discountAmount / combined.totalPrice : 0;
   const finalTotal = total - total * discountFraction;
 
   if (!isCartOpen) return null;
@@ -83,7 +85,7 @@ export default function ShoppingCart() {
               </p>
             </div>
           )}
-          {discountResult && (
+          {combined && (
             <p className="text-retro-yellow-highlight mb-1">
               Rabatt: {(total * discountFraction).toFixed(2)} {currency}
             </p>

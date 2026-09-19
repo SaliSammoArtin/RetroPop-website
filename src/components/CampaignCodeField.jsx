@@ -4,42 +4,54 @@ import Modules from '../modules/moduleMaker.js';
 import { useCurrency } from '../context/CurrencyContext.jsx';
 
 
-// Hämtar den RIKTIGA varukorgen och den DELADE rabatt-statusen via
-// CartContext. Eftersom discountResult kommer från Context istället
-// för lokal state, ser BÅDE sidopanelen och checkout-sidan samma
-// resultat automatiskt.
+// Hämtar den RIKTIGA varukorgen och LISTAN av applicerade koder via
+// CartContext. Kunden kan lägga till flera koder, som sedan kombineras
+// enligt modulens egen combineDiscounts regel.
 export default function CampaignCodeField( {total} ) {
-
  
-  const { cartItems, discountResult, setDiscountResult } = useCart();
+  const { cartItems, appliedCodes, setAppliedCodes } = useCart();
   const { currency } = useCurrency();
 
   // Håller koll på vad kunden skriver i fältet
   const [campaignCode, setCampaignCode] = useState("");
 
-  // Körs automatiskt VARJE gång cartItems ändras (produkt läggs till/tas bort).
-  // Nollställer rabatten och fältet, kunden måste skriva in koden på nytt
-  // om varukorgen ändrats, så gammal/felaktig rabatt inte "hänger kvar".
-  useEffect(() => {
-    if (cartItems.length === 0) {
-      setDiscountResult(null);
-      setCampaignCode("");
-    } else if (campaignCode) {
-      applyCampaignCode();
-    }
+  // Om varukorgen ändras (produkt läggs till/tas bort), nollställ ALLA
+  // applicerade koder - kunden får skriva in dem på nytt. Enklare än att
+  // räkna om varje kod automatiskt, och undviker att en ogiltig rabatt
+  // "hänger kvar" efter en ändring.
+    useEffect(() => {
+    setAppliedCodes([]);
   }, [cartItems]);
 
+  // Lägger till en ny kod i listan om den inte finns redan
   async function applyCampaignCode() {
-    // Anropar modulen (via moduleMaker) med koden och den riktiga varukorgen
+    const alreadyApplied = appliedCodes.some((entry) => entry.code === campaignCode);
+    if (alreadyApplied) return;
+
     const result = await Modules.CampaignModule.run({
       campaignCode: campaignCode,
       cart: cartItems,
     });
-    setDiscountResult(result);
+  
+
+      setAppliedCodes([...appliedCodes, { code: campaignCode, result }]);
+    setCampaignCode("");
   }
 
-  const discountFraction = discountResult
-  ? discountResult.discountAmount / discountResult.totalPrice
+  // Tar bort en specifik kod ur listan.
+  function removeCode(codeToRemove) {
+    setAppliedCodes(appliedCodes.filter((entry) => entry.code !== codeToRemove));
+  }
+
+  // Om minst en kod är tillagd: kombinera ALLA deras resultat till
+  // en enda slutsumma, via modulens combineDiscounts-metod.
+  const combined =
+    appliedCodes.length > 0
+      ? Modules.CampaignModule.combineDiscounts(appliedCodes.map((entry) => entry.result))
+      : null;
+
+  const discountFraction = combined
+  ? combined.discountAmount / combined.totalPrice
   : 0;
   const displayedDiscount = total ? total * discountFraction : 0;
 
@@ -60,16 +72,22 @@ export default function CampaignCodeField( {total} ) {
           className="bg-retro-yellow-highlight hover:bg-retro-orange-bg border-4 border-retro-green-text rounded px-4 py-2 font-black tracking-wide transition-colors">
           Använd kod
         </button>
+      </div>
+      {appliedCodes.length > 0 && (
+  <div className="flex flex-col gap-1">
+    {appliedCodes.map((entry) => (
+      <div key={entry.code} className="flex items-center justify-between gap-2">
+        <span className="text-retro-green-text font-bold">{entry.code}</span>
         <button
-          onClick={() => {
-            setDiscountResult(null);
-            setCampaignCode("");
-          }}
-          className="border-4 bg-retro-green-text text-retro-cream-bg border-retro-dark-text hover:bg-red-600 rounded px-4 py-2 font-black tracking-wide transition-colors">
-          Ta bort kod
+          onClick={() => removeCode(entry.code)}
+          className="border-2 bg-retro-green-text text-retro-cream-bg border-retro-dark-text hover:bg-red-600 rounded px-2 py-1 text-sm transition-colors">
+          Ta bort
         </button>
       </div>
-      {discountResult && (
+    ))}
+  </div>
+)}
+      {combined && (
         <p className="font-black tracking-wide text-retro-green-text">
           Rabatt: {displayedDiscount.toFixed(2)} {currency}
         </p>

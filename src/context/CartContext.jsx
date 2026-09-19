@@ -5,7 +5,7 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [discountResult, setDiscountResult] = useState(null);
+  const [appliedCodes, setAppliedCodes] = useState([]);
   const [shippingQuote, setShippingQuote] = useState(null); //Frakt användaren valt
   const [postalCode, setPostalCode] = useState(""); //Postnummer från användaren
   const [toast, setToast] = useState(null);
@@ -64,8 +64,8 @@ export const CartProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         deleteFromCart,
-        discountResult,
-        setDiscountResult,
+        appliedCodes,
+        setAppliedCodes,
         shippingQuote,
         setShippingQuote,
         postalCode,
