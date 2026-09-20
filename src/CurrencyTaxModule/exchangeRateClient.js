@@ -53,7 +53,7 @@ export default class ExchangeRateClient {
     const fetchPromise = (async () => {
       try {
         const result = await fetch(
-          `http://localhost:3000/rates?from=${fromUpper}&to=${toUpper}`,
+          `/api/rates?from=${fromUpper}&to=${toUpper}`,
         );
         if (!result.ok) {
           throw new ExchangeRateFetchError(`Server response: ${result.status}`);
