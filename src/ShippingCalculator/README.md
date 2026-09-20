@@ -9,14 +9,14 @@ och resturneras som tre prisalternativ. Användaren väljer ett alternativ som s
 Cart.jsx lägger till fraktkostnaden i totalsumman för ordern. Användaren tillåts inte checka ut utan ha valt fraktalternativ. 
 
 Filer som enbart behandlar modulen:
-/ShippingCalculator/Carrier.jsx
-/ShippingCalculator/index.jsx
-/ShippingCalculator/Parcel.jsx
-/ShippingCalculator/Shipping.jsx
-/ShippingCalculator/ShippingService.jsx
+/ShippingCalculator/Carrier.js
+/ShippingCalculator/index.js
+/ShippingCalculator/Parcel.js
+/ShippingCalculator/Shipping.js
+/ShippingCalculator/ShippingService.js
 /Components/ShippingQuotes.jsx
 
 Övriga filer som modulen ingår i:
-/Modules/moduleMaker.jsx
+/Modules/moduleMaker.js
 /Context/CartContext.jsx
 /Pages/Cart.jsx
